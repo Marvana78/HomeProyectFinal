@@ -25,7 +25,7 @@ function Header() {
           sx={{ flex: 1 }}
         >
           <div>
-            <img src="../../Assets/Logos/logo1.png" alt="logo" />
+            <img src="" alt="logo" />
           </div>
         </Typography>
         <IconButton>
@@ -46,15 +46,5 @@ function Header() {
     </React.Fragment>
   );
 }
-
-Header.propTypes = {
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  title: PropTypes.string.isRequired,
-};
 
 export default Header;
