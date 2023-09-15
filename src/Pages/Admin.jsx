@@ -65,9 +65,13 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
-
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#f57c00",
+    },
+  },
+});
 
 const Admin = () => {
   const [open, setOpen] = React.useState(false);
@@ -120,11 +124,6 @@ const Admin = () => {
             >
               ¡Bienvenido!
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -140,15 +139,15 @@ const Admin = () => {
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
-          <Divider />
+          <Divider sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }} />
         </Drawer>
         <Box
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === "light"
+              theme.palette.mode === "dark"
                 ? theme.palette.grey[300]
-                : theme.palette.grey[900],
+                : theme.palette.grey[600],
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
@@ -178,7 +177,9 @@ const Admin = () => {
                     <h2 className="titulo my-3">Menues Activos</h2>
                     <ShowEditButton />
                   </Grid>
-                  <Divider sx={{ borderColor: "#42a5f5", borderWidth: 1.5 }} />
+                  <Divider
+                    sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}
+                  />
                 </Paper>
               </Grid>
               <Grid spacing={3} marginLeft={2} sx={{ width: "50%" }}>
@@ -202,7 +203,9 @@ const Admin = () => {
                     <h2 className="titulo my-3">Usuarios Activos</h2>
                     <ShowEditButton />
                   </Grid>
-                  <Divider sx={{ borderColor: "#42a5f5", borderWidth: 1.5 }} />
+                  <Divider
+                    sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}
+                  />
                 </Paper>
               </Grid>
             </Grid>
