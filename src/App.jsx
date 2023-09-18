@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
-import AdminMenu from "./Pages/AdminMenu";
+import AdminMenu from "./Pages/Admin/AdminMenu";
 import AdminUsers from "./Pages/AdminUsers";
 import AdminPedidos from "./Pages/AdminPedidos";
 
