@@ -18,6 +18,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Skeleton from "@mui/material/Skeleton";
 import { ShowEditButton } from "../Components/Buttons";
+import ListItems from "../Components/Admin/ListItems";
 
 const drawerWidth = 240;
 
@@ -73,7 +74,7 @@ const defaultTheme = createTheme({
   },
 });
 
-const Admin = () => {
+const AdminUsers = () => {
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -140,6 +141,7 @@ const Admin = () => {
             </IconButton>
           </Toolbar>
           <Divider sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }} />
+          <ListItems />
         </Drawer>
         <Box
           component="main"
@@ -147,7 +149,7 @@ const Admin = () => {
             backgroundColor: (theme) =>
               theme.palette.mode === "dark"
                 ? theme.palette.grey[300]
-                : theme.palette.grey[600],
+                : theme.palette.grey[500],
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
@@ -156,33 +158,7 @@ const Admin = () => {
           <Toolbar />
           <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
             <Grid sx={{ display: "flex", flexDirection: "row" }}>
-              <Grid spacing={1} sx={{ width: "50%", height: 600 }}>
-                <Paper
-                  sx={{
-                    paddingX: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                    width: "100%",
-                  }}
-                >
-                  <Grid
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      width: "100%",
-                    }}
-                  >
-                    <h2 className="titulo my-3">Menues Activos</h2>
-                    <ShowEditButton />
-                  </Grid>
-                  <Divider
-                    sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}
-                  />
-                </Paper>
-              </Grid>
-              <Grid spacing={3} marginLeft={2} sx={{ width: "50%" }}>
+              <Grid spacing={1} sx={{ width: "100%", height: 600 }}>
                 <Paper
                   sx={{
                     paddingX: 2,
@@ -216,4 +192,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default AdminUsers;

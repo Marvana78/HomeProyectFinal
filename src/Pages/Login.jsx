@@ -14,9 +14,13 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: "#f57c00",
+    },
+  },
+});
 
 export default function Login() {
   const handleSubmit = (event) => {
@@ -100,7 +104,7 @@ export default function Login() {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                href="/Admin"
+                href="/AdminMenu"
               >
                 Iniciar Sesión
               </Button>
