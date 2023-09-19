@@ -60,6 +60,14 @@ const AddProdModal = ({ open, onClose }) => {
       label: "Cocina",
     },
     {
+      value: "LineaVegan",
+      label: "Linea Vegana",
+    },
+    {
+      value: "LineaVeggie",
+      label: "Linea Veggie",
+    },
+    {
       value: "Ensaladas",
       label: "Ensaladas",
     },
@@ -102,8 +110,7 @@ const AddProdModal = ({ open, onClose }) => {
       Categoria === "" ||
       Descripcion === "" ||
       Nombre === "" ||
-      Precio === "" ||
-      Minimo === ""
+      Precio === ""
     ) {
       return console.log("todos los campos son obligatorios");
     }

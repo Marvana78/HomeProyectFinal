@@ -198,7 +198,25 @@ const AdminMenu = () => {
                   <Divider
                     sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}
                   />
-                  <ProdCard />
+                  <Grid
+                    sx={{
+                      paddingRight: 1,
+                      width: "100%",
+                      height: 500,
+                      overflow: "auto",
+                      scrollbarWidth: "thin",
+                      scrollbarColor: "dark",
+                      "&::-webkit-scrollbar": {
+                        width: "8px",
+                      },
+                      "&::-webkit-scrollbar-thumb": {
+                        background: "lightgray",
+                        borderRadius: "5px",
+                      },
+                    }}
+                  >
+                    <ProdCard />
+                  </Grid>
                 </Paper>
               </Grid>
               <Grid spacing={3} marginLeft={2} sx={{ width: "50%" }}>

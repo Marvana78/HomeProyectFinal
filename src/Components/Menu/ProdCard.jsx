@@ -40,7 +40,7 @@ export default function ProdCard() {
   };
 
   return (
-    <div>
+    <Grid>
       {productos.map((producto, index) => (
         <Card
           key={index}
@@ -58,7 +58,14 @@ export default function ProdCard() {
               <Typography variant="h6" component="div">
                 {producto.Nombre}
               </Typography>
-              <Typography variant="subtitle2" component="div">
+              <Typography variant="subtitle1" component="div">
+                Categoría: {producto.Categoria}
+              </Typography>
+              <Typography
+                variant="body2"
+                component="div"
+                color="text.secondary"
+              >
                 {producto.Descripcion}
               </Typography>
             </Grid>
@@ -77,6 +84,6 @@ export default function ProdCard() {
           </CardContent>
         </Card>
       ))}
-    </div>
+    </Grid>
   );
 }
