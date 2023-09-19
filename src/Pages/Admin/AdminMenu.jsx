@@ -17,6 +17,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { AddButton, ShowEditButton } from "../../Components/Buttons";
 import ListItems from "../../Components/Admin/ListItems";
 import ProdCard from "../../Components/Menu/ProdCard";
+import AddProdModal from "../../Components/Menu/AddProdModal";
 
 const drawerWidth = 240;
 
@@ -78,6 +79,15 @@ const AdminMenu = () => {
     setOpen(!open);
   };
   const [loading, setLoading] = useState(true);
+  const [prodModalOpen, setProdModalOpen] = React.useState(false);
+
+  const handleProdModalOpen = () => {
+    setProdModalOpen(true);
+  };
+
+  const handleProdModalClose = () => {
+    setProdModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -177,8 +187,12 @@ const AdminMenu = () => {
                   >
                     <h2 className="titulo my-3">Productos Activos</h2>
                     <Grid sx={{ display: "flex" }}>
-                      <AddButton />
+                      <AddButton handleClick={handleProdModalOpen} />
                       <ShowEditButton />
+                      <AddProdModal
+                        open={prodModalOpen}
+                        onClose={handleProdModalClose}
+                      />
                     </Grid>
                   </Grid>
                   <Divider
