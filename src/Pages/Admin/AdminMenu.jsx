@@ -9,16 +9,14 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import Skeleton from "@mui/material/Skeleton";
-import { ShowEditButton } from "../../Components/Buttons";
+import { AddButton, ShowEditButton } from "../../Components/Buttons";
 import ListItems from "../../Components/Admin/ListItems";
+import ProdCard from "../../Components/Menu/ProdCard";
 
 const drawerWidth = 240;
 
@@ -177,12 +175,16 @@ const AdminMenu = () => {
                       width: "100%",
                     }}
                   >
-                    <h2 className="titulo my-3">Menues Activos</h2>
-                    <ShowEditButton />
+                    <h2 className="titulo my-3">Productos Activos</h2>
+                    <Grid sx={{ display: "flex" }}>
+                      <AddButton />
+                      <ShowEditButton />
+                    </Grid>
                   </Grid>
                   <Divider
                     sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}
                   />
+                  <ProdCard />
                 </Paper>
               </Grid>
               <Grid spacing={3} marginLeft={2} sx={{ width: "50%" }}>
@@ -204,7 +206,10 @@ const AdminMenu = () => {
                     }}
                   >
                     <h2 className="titulo my-3">Combos Activos</h2>
-                    <ShowEditButton />
+                    <Grid sx={{ display: "flex" }}>
+                      <AddButton />
+                      <ShowEditButton />
+                    </Grid>
                   </Grid>
                   <Divider
                     sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}

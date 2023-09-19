@@ -2,8 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import AdminMenu from "./Pages/Admin/AdminMenu";
-import AdminUsers from "./Pages/AdminUsers";
-import AdminPedidos from "./Pages/AdminPedidos";
+import AdminUsers from "./Pages/Admin/AdminUsers";
+import AdminPedidos from "./Pages/Admin/AdminPedidos";
 
 function App() {
   return (

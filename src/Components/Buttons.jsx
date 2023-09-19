@@ -39,7 +39,7 @@ export function OpCancelButton({ handleClick }) {
   );
 }
 
-export function AddOp({ handleClick }) {
+export function AddButton({ handleClick }) {
   return (
     <div className="mt-2 w-100">
       <div className="d-flex justify-content-end">
@@ -47,9 +47,12 @@ export function AddOp({ handleClick }) {
           <Button
             variant="contained"
             onClick={handleClick}
-            endIcon={<AddCircleIcon />}
+            startIcon={<AddCircleIcon />}
+            style={{
+              marginTop: 17,
+            }}
           >
-            Nueva Operación
+            Agregar
           </Button>
         </div>
       </div>
@@ -83,10 +86,11 @@ export function ShowEditButton({ setShowEditButton }) {
   return (
     <div>
       <Button
-        variant="contained"
+        variant="outlined"
         startIcon={<EditIcon />}
         style={{
           marginTop: 17,
+          marginLeft: 10,
         }}
         onClick={() => {
           setShowEditButton(EditState);
