@@ -1,19 +1,27 @@
 import { useState } from 'react';
 import { Navbar } from './Components/Navbar';
-import UserForm from './Components/UserForm'; // Asegúrate de que la importación esté correcta
-import UserList from './UserList';
+import UserForm from './Components/UserForm';
+import UserList from './Components/UserList';
+
 function App() {
-  const [count, setCount] = useState(0);
-  const [showForm, setShowForm] = useState(false); // Nuevo estado para controlar el formulario
+  const [showForm, setShowForm] = useState(false); // Estado para controlar la visibilidad del formulario
+  const [users, setUsers] = useState([]); // Estado para mantener un registro de los usuarios
+
+  // Función para agregar un nuevo usuario al estado
+  const addUser = (newUser) => {
+    setUsers([...users, newUser]);
+  };
 
   return (
-    <div>
+    <>
+      <Navbar />
       <button onClick={() => setShowForm(true)}>Agregar nuevo usuario</button>
-      {showForm && <UserForm />}
+      {showForm && <UserForm addUser={addUser} />}
       <UserList users={users} />
-    </div>
+    </>
   );
 }
 
 export default App;
+
 
