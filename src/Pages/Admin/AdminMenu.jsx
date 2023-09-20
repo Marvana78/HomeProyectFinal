@@ -18,6 +18,7 @@ import { AddButton, ShowEditButton } from "../../Components/Buttons";
 import ListItems from "../../Components/Admin/ListItems";
 import ProdCard from "../../Components/Menu/ProdCard";
 import AddProdModal from "../../Components/Menu/AddProdModal";
+import AddComboModal from "../../Components/Menu/AddComboModal";
 
 const drawerWidth = 240;
 
@@ -74,12 +75,13 @@ const defaultTheme = createTheme({
 });
 
 const AdminMenu = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
   const [loading, setLoading] = useState(true);
-  const [prodModalOpen, setProdModalOpen] = React.useState(false);
+  const [prodModalOpen, setProdModalOpen] = useState(false);
+  const [comboModalOpen, setComboModalOpen] = useState(false);
 
   const handleProdModalOpen = () => {
     setProdModalOpen(true);
@@ -87,6 +89,14 @@ const AdminMenu = () => {
 
   const handleProdModalClose = () => {
     setProdModalOpen(false);
+  };
+
+  const handleComboModalOpen = () => {
+    setComboModalOpen(true);
+  };
+
+  const handleComboModalClose = () => {
+    setComboModalOpen(false);
   };
 
   useEffect(() => {
@@ -187,7 +197,10 @@ const AdminMenu = () => {
                   >
                     <h2 className="titulo my-3">Productos Activos</h2>
                     <Grid sx={{ display: "flex" }}>
-                      <AddButton handleClick={handleProdModalOpen} />
+                      <AddButton
+                        handleClick={handleProdModalOpen}
+                        id={"openProdModal"}
+                      />
                       <ShowEditButton />
                       <AddProdModal
                         open={prodModalOpen}
@@ -239,8 +252,15 @@ const AdminMenu = () => {
                   >
                     <h2 className="titulo my-3">Combos Activos</h2>
                     <Grid sx={{ display: "flex" }}>
-                      <AddButton />
+                      <AddButton
+                        handleClick={handleComboModalOpen}
+                        id={"openComboModal"}
+                      />
                       <ShowEditButton />
+                      <AddComboModal
+                        open={comboModalOpen}
+                        onClose={handleComboModalClose}
+                      />
                     </Grid>
                   </Grid>
                   <Divider

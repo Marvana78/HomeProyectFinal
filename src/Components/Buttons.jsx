@@ -39,7 +39,7 @@ export function OpCancelButton({ handleClick }) {
   );
 }
 
-export function AddButton({ handleClick }) {
+export function AddButton({ handleClick, id }) {
   return (
     <div className="mt-2 w-100">
       <div className="d-flex justify-content-end">
@@ -51,6 +51,7 @@ export function AddButton({ handleClick }) {
             style={{
               marginTop: 17,
             }}
+            id={id}
           >
             Agregar
           </Button>
@@ -91,11 +92,11 @@ export function ShowEditButton({ setShowEditButton }) {
         style={{
           marginTop: 17,
           marginLeft: 10,
+          borderColor: "#f57c00",
         }}
         onClick={() => {
           setShowEditButton(EditState);
           setEditState(!EditState);
-          console.log(EditState);
         }}
       >
         Editar

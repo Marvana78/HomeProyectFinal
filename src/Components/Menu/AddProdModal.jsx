@@ -84,27 +84,13 @@ const AddProdModal = ({ open, onClose }) => {
   const SwAlert = () => {
     swal({
       title: "¡Exito!",
-      text: "La operación se agregó correctamente",
+      text: "El producto se agregó correctamente",
       icon: "success",
-    });
-  };
-
-  const SwAlertErrorFondos = () => {
-    swal({
-      title: "¡Error!",
-      text: "No posee los fondos suficientes para realizar la operación",
-      icon: "error",
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    console.log(Categoria);
-    console.log(Descripcion);
-    console.log(Nombre);
-    console.log(Minimo);
-    console.log(Precio);
 
     if (
       Categoria === "" ||
@@ -156,7 +142,7 @@ const AddProdModal = ({ open, onClose }) => {
                   Nombre
                 </InputLabel>
                 <OutlinedInput
-                  id="outlined-adornment-amount"
+                  id="crearProdNombre"
                   label="Nombre"
                   onChange={(e) => setNombre(e.target.value)}
                 />
@@ -166,7 +152,7 @@ const AddProdModal = ({ open, onClose }) => {
               <TextField
                 fullWidth
                 className="mt-3"
-                id="outlined-multiline-static"
+                id="crearProdDescripcion"
                 label="Descripción"
                 multiline
                 rows={4}
@@ -177,7 +163,7 @@ const AddProdModal = ({ open, onClose }) => {
             <Grid display={"flex"}>
               <Grid width={"40%"} mb={2}>
                 <TextField
-                  id="outlined-select-currency"
+                  id="crearProdCategoria"
                   select
                   label="Categoría"
                   defaultValue=""
@@ -198,7 +184,7 @@ const AddProdModal = ({ open, onClose }) => {
                     Precio
                   </InputLabel>
                   <OutlinedInput
-                    id="outlined-adornment-amount"
+                    id="crearProdPrecio"
                     label="Precio"
                     onChange={(e) => setPrecio(e.target.value)}
                   />
@@ -210,7 +196,7 @@ const AddProdModal = ({ open, onClose }) => {
                     Mínimo unidades
                   </InputLabel>
                   <OutlinedInput
-                    id="outlined-adornment-amount"
+                    id="crearProdMinimo"
                     label="Minimo"
                     onChange={(e) => setMinimo(e.target.value)} // Actualiza el estado del mínimo de unidades
                   />
@@ -225,6 +211,7 @@ const AddProdModal = ({ open, onClose }) => {
             variant="contained"
             sx={{ mt: 3, mb: 2, width: "20%" }}
             onClick={handleSubmit}
+            id="AddProd"
           >
             Crear producto
           </Button>
