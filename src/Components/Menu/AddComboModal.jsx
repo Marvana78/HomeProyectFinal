@@ -111,6 +111,20 @@ const AddComboModal = ({ open, onClose }) => {
     setProductQuantity("");
   };
 
+  const vaciarComposicion = () => {
+    setProductosElegidos([]);
+  };
+
+  const calcularTotalCantidadProductos = () => {
+    let total = 0;
+
+    for (const producto of productosElegidos) {
+      total += producto.cantidad;
+    }
+
+    return total;
+  };
+
   return (
     <Modal open={open} onClose={onClose}>
       <Paper
@@ -120,7 +134,7 @@ const AddComboModal = ({ open, onClose }) => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: "70%",
+          width: "50%",
         }}
         className="CreateModal"
       >
@@ -163,8 +177,8 @@ const AddComboModal = ({ open, onClose }) => {
             </Grid>
           </Grid>
 
-          <Grid>
-            <Grid mb={2}>
+          <Grid display={"flex"}>
+            <Grid mb={2} width={"60%"} mr={2}>
               <TextField
                 select
                 fullWidth
@@ -179,7 +193,7 @@ const AddComboModal = ({ open, onClose }) => {
                 ))}
               </TextField>
             </Grid>
-            <Grid mb={2}>
+            <Grid mb={2} width={"20%"} mr={2}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Cantidad
@@ -189,35 +203,63 @@ const AddComboModal = ({ open, onClose }) => {
                   label="Cantidad"
                   value={productQuantity}
                   onChange={(e) => setProductQuantity(e.target.value)}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() =>
-                          agregarProducto(selectedProduct, productQuantity)
-                        }
-                      >
-                        Agregar
-                      </Button>
-                    </InputAdornment>
-                  }
                 />
               </FormControl>
             </Grid>
+            <Grid mb={2} width={"20%"} container>
+              <Button
+                variant="outlined"
+                color="primary"
+                fullWidth
+                onClick={() =>
+                  agregarProducto(selectedProduct, productQuantity)
+                }
+              >
+                Agregar
+              </Button>
+            </Grid>
           </Grid>
-          <Typography variant="h6" mb={1}>
-            Productos Elegidos:
-          </Typography>
-          <ul>
-            {productosElegidos.map((producto, index) => (
-              <li key={index}>
-                {producto.nombre} - Cantidad: {producto.cantidad}
-              </li>
-            ))}
-          </ul>
-          <Grid display={"flex"}>
-            <Grid width={"30%"} ml={2}>
+          <Grid>
+            <TextField
+              fullWidth
+              className="mt-3"
+              id="outlined-multiline-static"
+              label="Productos elegidos"
+              multiline
+              rows={4}
+              variant="outlined"
+              value={productosElegidos
+                .map(
+                  (producto, index) =>
+                    `${producto.nombre} - Cantidad: ${producto.cantidad}\n`
+                )
+                .join("")}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </Grid>
+
+          <Grid display={"flex"} justifyContent={"space-between"}>
+            <Grid>
+              <Typography
+                variant="subtitle1"
+                color="Highlight"
+                onClick={vaciarComposicion}
+                textAlign={"start"}
+                mt={1}
+                sx={{ cursor: "pointer" }}
+              >
+                Vaciar campo
+              </Typography>
+              <Grid>
+                <Typography variant="h6" mb={1}>
+                  Total de Cantidad de Productos:{" "}
+                  {calcularTotalCantidadProductos()}
+                </Typography>
+              </Grid>
+            </Grid>
+            <Grid width={"30%"} mt={2}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="outlined-adornment-amount">
                   Precio
@@ -231,7 +273,7 @@ const AddComboModal = ({ open, onClose }) => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid>
+        <Grid container justifyContent={"end"}>
           <Button
             type="submit"
             variant="contained"
