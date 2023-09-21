@@ -24,7 +24,7 @@ const AddComboModal = ({ open, onClose }) => {
   const [Productos, setProductos] = useState([]);
   const [productosElegidos, setProductosElegidos] = useState([]);
   const [productQuantity, setProductQuantity] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   const comboNuevo = async (
     Cantidad,
@@ -62,7 +62,7 @@ const AddComboModal = ({ open, onClose }) => {
     event.preventDefault();
 
     if (
-      Categoria === "" ||
+      Composicion === "" ||
       Descripcion === "" ||
       Nombre === "" ||
       Precio === ""
@@ -75,13 +75,22 @@ const AddComboModal = ({ open, onClose }) => {
       cantidad: producto.cantidad,
     }));
 
-    comboNuevo(Categoria, Descripcion, Nombre, Precio, composicion);
+    setComposicion(composicion);
+    setCantidad(calcularTotalCantidadProductos);
 
-    setCategoria("");
+    console.log(Cantidad);
+    console.log(Descripcion);
+    console.log(Precio);
+    console.log(Nombre);
+    console.log(Composicion);
+
+    comboNuevo(Cantidad, Descripcion, Nombre, Precio, Composicion);
+
+    setComposicion("");
     setDescripcion("");
     setNombre("");
     setPrecio("");
-    setMinimo("");
+    setCantidad("");
   };
 
   useEffect(() => {
@@ -97,19 +106,45 @@ const AddComboModal = ({ open, onClose }) => {
     }
   };
 
-  const agregarProducto = (producto, cantidad) => {
-    setProductosElegidos([
-      ...productosElegidos,
-      {
-        id: producto.id,
-        nombre: producto.Nombre,
-        cantidad: cantidad,
-      },
-    ]);
-    console.log(productosElegidos);
+  const agregarProducto = () => {
+    if (selectedProduct === "" || productQuantity <= 0) {
+      alert("Selecciona un producto y una cantidad válida.");
+      return;
+    }
+
+    const productoExistente = productosElegidos.find(
+      (producto) => producto.id === selectedProduct.id
+    );
+
+    if (productoExistente) {
+      const productosActualizados = productosElegidos.map((producto) => {
+        if (producto.id === selectedProduct.id) {
+          return {
+            ...producto,
+            cantidad: producto.cantidad + parseFloat(productQuantity),
+          };
+        }
+        return producto;
+      });
+
+      setProductosElegidos(productosActualizados);
+    } else {
+      const nuevoProducto = {
+        id: selectedProduct.id,
+        nombre: selectedProduct.Nombre,
+        cantidad: parseFloat(productQuantity),
+      };
+
+      setProductosElegidos([...productosElegidos, nuevoProducto]);
+    }
+
     setSelectedProduct("");
     setProductQuantity("");
   };
+
+  useEffect(() => {
+    setComposicion(productosElegidos);
+  }, [productosElegidos]);
 
   const vaciarComposicion = () => {
     setProductosElegidos([]);
@@ -119,7 +154,11 @@ const AddComboModal = ({ open, onClose }) => {
     let total = 0;
 
     for (const producto of productosElegidos) {
-      total += producto.cantidad;
+      const cantidadNumerica = parseFloat(producto.cantidad);
+
+      if (!isNaN(cantidadNumerica)) {
+        total += cantidadNumerica;
+      }
     }
 
     return total;
@@ -157,7 +196,7 @@ const AddComboModal = ({ open, onClose }) => {
                   Nombre
                 </InputLabel>
                 <OutlinedInput
-                  id="outlined-adornment-amount"
+                  id="ComboNombre"
                   label="Nombre"
                   onChange={(e) => setNombre(e.target.value)}
                 />
@@ -167,7 +206,7 @@ const AddComboModal = ({ open, onClose }) => {
               <TextField
                 fullWidth
                 className="mt-3"
-                id="outlined-multiline-static"
+                id="ComboDescripcion"
                 label="Descripción"
                 multiline
                 rows={4}
@@ -181,13 +220,18 @@ const AddComboModal = ({ open, onClose }) => {
             <Grid mb={2} width={"60%"} mr={2}>
               <TextField
                 select
+                id="ComboProductosList"
                 fullWidth
                 label="Seleccione un producto"
                 value={selectedProduct}
                 onChange={(e) => setSelectedProduct(e.target.value)}
               >
                 {Productos.map((producto) => (
-                  <MenuItem key={producto.id} value={producto}>
+                  <MenuItem
+                    key={producto.id}
+                    value={producto}
+                    id="ComboProducto"
+                  >
                     {producto.Nombre}
                   </MenuItem>
                 ))}
@@ -199,7 +243,7 @@ const AddComboModal = ({ open, onClose }) => {
                   Cantidad
                 </InputLabel>
                 <OutlinedInput
-                  id="outlined-adornment-amount"
+                  id="ComboProductoCantidad"
                   label="Cantidad"
                   value={productQuantity}
                   onChange={(e) => setProductQuantity(e.target.value)}
@@ -208,6 +252,7 @@ const AddComboModal = ({ open, onClose }) => {
             </Grid>
             <Grid mb={2} width={"20%"} container>
               <Button
+                id="ComboAgregarProducto"
                 variant="outlined"
                 color="primary"
                 fullWidth
@@ -228,12 +273,10 @@ const AddComboModal = ({ open, onClose }) => {
               multiline
               rows={4}
               variant="outlined"
-              value={productosElegidos
-                .map(
-                  (producto, index) =>
-                    `${producto.nombre} - Cantidad: ${producto.cantidad}\n`
-                )
-                .join("")}
+              value={Composicion.map(
+                (producto, index) =>
+                  `${producto.nombre} - Cantidad: ${producto.cantidad}\n`
+              ).join("")}
               InputProps={{
                 readOnly: true,
               }}
