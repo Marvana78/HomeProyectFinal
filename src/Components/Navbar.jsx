@@ -1,29 +1,19 @@
 import React from 'react';
+import '../css/style.css';
 
 
 export const Navbar = () => {
   return (
     <>
-<nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
-  <div className="container-fluid">
-    <div className="collapse navbar-collapse" id="navbarNav">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100 d-flex justify-content-center navtext">
-        <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Pedidos</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Registro</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="#">Login</a>
-        </li>
+<nav className="navbar">
+      <ul className="navbar-list pt-3 w-100 justify-content-center">
+        <li className="navbar-item"><a href="#">Home</a></li>
+        <li className="navbar-item"><a href="#">Pedido</a></li>
+        <li className="navbar-item"><a href="#">Registro</a></li>
+        <li className="navbar-item"><a href="#">Login</a></li>
       </ul>
-    </div>
-  </div>
-</nav>
+    </nav>
     </>
   )
 }
+export default Navbar;
