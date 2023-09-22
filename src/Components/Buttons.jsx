@@ -67,22 +67,22 @@ export function ShowEditButton({ setShowEditButton }) {
 
   const [EditState, setEditState] = useState(false);
 
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      try {
-        const resp = await serverAPI.get("/auth/getUserByEmail", {
-          params: { email: loggedInUserEmail },
-        });
-        setUserRole(resp.data.rol);
-      } catch (error) {
-        console.error("Error fetching user role:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUserRole = async () => {
+  //     try {
+  //       const resp = await serverAPI.get("/auth/getUserByEmail", {
+  //         params: { email: loggedInUserEmail },
+  //       });
+  //       setUserRole(resp.data.rol);
+  //     } catch (error) {
+  //       console.error("Error fetching user role:", error);
+  //     }
+  //   };
 
-    if (loggedInUserEmail) {
-      fetchUserRole();
-    }
-  }, [loggedInUserEmail]);
+  //   if (loggedInUserEmail) {
+  //     fetchUserRole();
+  //   }
+  // }, [loggedInUserEmail]);
 
   return (
     <div>

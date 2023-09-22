@@ -71,22 +71,21 @@ const AddComboModal = ({ open, onClose }) => {
     }
 
     const composicion = productosElegidos.map((producto) => ({
-      productoId: producto.id,
+      producto: producto.nombre,
       cantidad: producto.cantidad,
     }));
 
-    setComposicion(composicion);
-    setCantidad(calcularTotalCantidadProductos);
+    const cantidadTotal = calcularTotalCantidadProductos();
+    console.log("Cantidad Total:", cantidadTotal);
 
-    console.log(Cantidad);
     console.log(Descripcion);
     console.log(Precio);
     console.log(Nombre);
     console.log(Composicion);
 
-    comboNuevo(Cantidad, Descripcion, Nombre, Precio, Composicion);
+    comboNuevo(cantidadTotal, Descripcion, Nombre, Precio, composicion);
 
-    setComposicion("");
+    setComposicion([]);
     setDescripcion("");
     setNombre("");
     setPrecio("");
@@ -145,7 +144,6 @@ const AddComboModal = ({ open, onClose }) => {
   };
 
   useEffect(() => {
-    console.log(productosElegidos);
     setComposicion(productosElegidos);
   }, [productosElegidos]);
 
