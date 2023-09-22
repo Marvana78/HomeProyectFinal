@@ -19,6 +19,7 @@ import ListItems from "../../Components/Admin/ListItems";
 import ProdCard from "../../Components/Menu/ProdCard";
 import AddProdModal from "../../Components/Menu/AddProdModal";
 import AddComboModal from "../../Components/Menu/AddComboModal";
+import ComboCard from "../../Components/Menu/ComboCard";
 
 const drawerWidth = 240;
 
@@ -266,6 +267,25 @@ const AdminMenu = () => {
                   <Divider
                     sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}
                   />
+                  <Grid
+                    sx={{
+                      paddingRight: 1,
+                      width: "100%",
+                      height: 500,
+                      overflow: "auto",
+                      scrollbarWidth: "thin",
+                      scrollbarColor: "dark",
+                      "&::-webkit-scrollbar": {
+                        width: "8px",
+                      },
+                      "&::-webkit-scrollbar-thumb": {
+                        background: "lightgray",
+                        borderRadius: "5px",
+                      },
+                    }}
+                  >
+                    <ComboCard />
+                  </Grid>
                 </Paper>
               </Grid>
             </Grid>
