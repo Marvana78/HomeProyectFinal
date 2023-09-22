@@ -107,18 +107,19 @@ const AddComboModal = ({ open, onClose }) => {
   };
 
   const agregarProducto = () => {
-    if (selectedProduct === "" || productQuantity <= 0) {
+    if (!selectedProduct || productQuantity <= 0) {
       alert("Selecciona un producto y una cantidad válida.");
       return;
     }
 
     const productoExistente = productosElegidos.find(
-      (producto) => producto.id === selectedProduct.id
+      (producto) => producto._id === selectedProduct._id
     );
 
     if (productoExistente) {
+      // Sumar la cantidad al producto existente
       const productosActualizados = productosElegidos.map((producto) => {
-        if (producto.id === selectedProduct.id) {
+        if (producto._id === selectedProduct._id) {
           return {
             ...producto,
             cantidad: producto.cantidad + parseFloat(productQuantity),
@@ -129,8 +130,9 @@ const AddComboModal = ({ open, onClose }) => {
 
       setProductosElegidos(productosActualizados);
     } else {
+      // Agregar un nuevo producto
       const nuevoProducto = {
-        id: selectedProduct.id,
+        _id: selectedProduct._id,
         nombre: selectedProduct.Nombre,
         cantidad: parseFloat(productQuantity),
       };
@@ -143,6 +145,7 @@ const AddComboModal = ({ open, onClose }) => {
   };
 
   useEffect(() => {
+    console.log(productosElegidos);
     setComposicion(productosElegidos);
   }, [productosElegidos]);
 
