@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     firstName: '',
     lastName: '',
     birthDate: '',
@@ -11,7 +11,17 @@ const RegistrationForm = () => {
     email: '',
     password: '',
     confirmPassword: '',
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
+
+  useEffect(() => {
+    // Cargar datos desde localStorage cuando se monta el componente
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      setFormData(JSON.parse(savedFormData));
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,9 +33,13 @@ const RegistrationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Realiza la validación aquí y, si es válida, envía los datos al servidor
     if (formData.password === formData.confirmPassword) {
+      // Guardar los datos en localStorage cuando se envía el formulario
+      localStorage.setItem('formData', JSON.stringify(formData));
       console.log(formData);
+      alert('Registro exitoso');
+      // Reiniciar el formulario después de guardar los datos
+      setFormData(initialFormData);
     } else {
       alert('Las contraseñas no coinciden');
     }
