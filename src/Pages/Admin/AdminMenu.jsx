@@ -83,6 +83,7 @@ const AdminMenu = () => {
   const [loading, setLoading] = useState(true);
   const [prodModalOpen, setProdModalOpen] = useState(false);
   const [comboModalOpen, setComboModalOpen] = useState(false);
+  const [showEditButton, setShowEditButton] = useState(false);
 
   const handleProdModalOpen = () => {
     setProdModalOpen(true);
@@ -202,7 +203,7 @@ const AdminMenu = () => {
                         handleClick={handleProdModalOpen}
                         id={"openProdModal"}
                       />
-                      <ShowEditButton />
+                      <ShowEditButton setShowEditButton={setShowEditButton} />
                       <AddProdModal
                         open={prodModalOpen}
                         onClose={handleProdModalClose}
@@ -229,7 +230,7 @@ const AdminMenu = () => {
                       },
                     }}
                   >
-                    <ProdCard />
+                    <ProdCard showEditButton={showEditButton} />
                   </Grid>
                 </Paper>
               </Grid>

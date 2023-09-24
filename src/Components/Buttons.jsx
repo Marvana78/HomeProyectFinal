@@ -7,38 +7,6 @@ import { useState, useEffect } from "react";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 
-export function OpOkButton({ handleClick }) {
-  return (
-    <Stack direction="row" spacing={2}>
-      <Button
-        variant="contained"
-        sx={{ width: 150 }}
-        endIcon={<CheckCircleIcon />}
-        color="success"
-        onClick={handleClick}
-      >
-        Aceptar
-      </Button>
-    </Stack>
-  );
-}
-
-export function OpCancelButton({ handleClick }) {
-  return (
-    <Stack direction="row" spacing={2}>
-      <Button
-        variant="outlined"
-        sx={{ width: 150 }}
-        endIcon={<CancelIcon />}
-        color="error"
-        onClick={handleClick}
-      >
-        Cancelar
-      </Button>
-    </Stack>
-  );
-}
-
 export function AddButton({ handleClick, id }) {
   return (
     <div className="mt-2 w-100">
@@ -62,27 +30,7 @@ export function AddButton({ handleClick, id }) {
 }
 
 export function ShowEditButton({ setShowEditButton }) {
-  const loggedInUserEmail = localStorage.getItem("loggedInUserEmail");
-  const [userRole, setUserRole] = useState("");
-
   const [EditState, setEditState] = useState(false);
-
-  // useEffect(() => {
-  //   const fetchUserRole = async () => {
-  //     try {
-  //       const resp = await serverAPI.get("/auth/getUserByEmail", {
-  //         params: { email: loggedInUserEmail },
-  //       });
-  //       setUserRole(resp.data.rol);
-  //     } catch (error) {
-  //       console.error("Error fetching user role:", error);
-  //     }
-  //   };
-
-  //   if (loggedInUserEmail) {
-  //     fetchUserRole();
-  //   }
-  // }, [loggedInUserEmail]);
 
   return (
     <div>
@@ -97,6 +45,7 @@ export function ShowEditButton({ setShowEditButton }) {
         onClick={() => {
           setShowEditButton(EditState);
           setEditState(!EditState);
+          console.log(EditState);
         }}
       >
         Editar
@@ -105,12 +54,11 @@ export function ShowEditButton({ setShowEditButton }) {
   );
 }
 
-export function EditButton({ visible, handleClick }) {
+export function EditButton({ handleClick }) {
   return (
     <IconButton
       aria-label="edit"
       style={{
-        display: visible ? "flex" : "none",
         marginTop: 17,
       }}
       onClick={handleClick}

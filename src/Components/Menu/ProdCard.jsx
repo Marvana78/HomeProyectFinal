@@ -4,7 +4,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { EditButton } from "../Buttons";
 import serverAPI from "../../api/serverAPI";
+import EditProdModal from "./EditProdModal";
 
 const bull = (
   <Box
@@ -15,8 +17,9 @@ const bull = (
   </Box>
 );
 
-export default function ProdCard() {
+export default function ProdCard({ showEditButton }) {
   const [productos, setProductos] = useState([]);
+  const [productToEdit, setProductToEdit] = useState("");
 
   useEffect(() => {
     fetchProductosData();
@@ -69,6 +72,13 @@ export default function ProdCard() {
                 {producto.Descripcion}
               </Typography>
             </Grid>
+            {showEditButton && (
+              <EditButton
+                handleClick={() => {
+                  handleOpenModal();
+                }}
+              />
+            )}
             <Grid sx={{ marginTop: 4, width: "20%" }}>
               <Typography sx={{ fontWeight: "bold", textAlign: "end" }}>
                 {formatCurrency(producto.Precio, "ARS")}
