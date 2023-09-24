@@ -29,7 +29,7 @@ export function AddButton({ handleClick, id }) {
   );
 }
 
-export function ShowEditButton({ setShowEditButton }) {
+export function ShowComboEditButton({ setShowComboEditButton }) {
   const [EditState, setEditState] = useState(false);
 
   return (
@@ -43,7 +43,32 @@ export function ShowEditButton({ setShowEditButton }) {
           borderColor: "#f57c00",
         }}
         onClick={() => {
-          setShowEditButton(EditState);
+          setShowComboEditButton(EditState);
+          setEditState(!EditState);
+          console.log(EditState);
+        }}
+      >
+        Editar
+      </Button>
+    </div>
+  );
+}
+
+export function ShowProdEditButton({ setShowProdEditButton }) {
+  const [EditState, setEditState] = useState(false);
+
+  return (
+    <div>
+      <Button
+        variant="outlined"
+        startIcon={<EditIcon />}
+        style={{
+          marginTop: 17,
+          marginLeft: 10,
+          borderColor: "#f57c00",
+        }}
+        onClick={() => {
+          setShowProdEditButton(EditState);
           setEditState(!EditState);
           console.log(EditState);
         }}
@@ -58,10 +83,8 @@ export function EditButton({ handleClick }) {
   return (
     <IconButton
       aria-label="edit"
-      style={{
-        marginTop: 17,
-      }}
       onClick={handleClick}
+      sx={{ width: 30, height: 30 }}
     >
       <EditIcon />
     </IconButton>

@@ -14,7 +14,11 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import { AddButton, ShowEditButton } from "../../Components/Buttons";
+import {
+  AddButton,
+  ShowComboEditButton,
+  ShowProdEditButton,
+} from "../../Components/Buttons";
 import ListItems from "../../Components/Admin/ListItems";
 import ProdCard from "../../Components/Menu/ProdCard";
 import AddProdModal from "../../Components/Menu/AddProdModal";
@@ -83,7 +87,8 @@ const AdminMenu = () => {
   const [loading, setLoading] = useState(true);
   const [prodModalOpen, setProdModalOpen] = useState(false);
   const [comboModalOpen, setComboModalOpen] = useState(false);
-  const [showEditButton, setShowEditButton] = useState(false);
+  const [showComboEditButton, setShowComboEditButton] = useState(false);
+  const [showProdEditButton, setShowProdEditButton] = useState(false);
 
   const handleProdModalOpen = () => {
     setProdModalOpen(true);
@@ -203,7 +208,9 @@ const AdminMenu = () => {
                         handleClick={handleProdModalOpen}
                         id={"openProdModal"}
                       />
-                      <ShowEditButton setShowEditButton={setShowEditButton} />
+                      <ShowProdEditButton
+                        setShowProdEditButton={setShowProdEditButton}
+                      />
                       <AddProdModal
                         open={prodModalOpen}
                         onClose={handleProdModalClose}
@@ -230,7 +237,7 @@ const AdminMenu = () => {
                       },
                     }}
                   >
-                    <ProdCard showEditButton={showEditButton} />
+                    <ProdCard showProdEditButton={showProdEditButton} />
                   </Grid>
                 </Paper>
               </Grid>
@@ -258,7 +265,9 @@ const AdminMenu = () => {
                         handleClick={handleComboModalOpen}
                         id={"openComboModal"}
                       />
-                      <ShowEditButton />
+                      <ShowComboEditButton
+                        setShowComboEditButton={setShowComboEditButton}
+                      />
                       <AddComboModal
                         open={comboModalOpen}
                         onClose={handleComboModalClose}
@@ -285,7 +294,7 @@ const AdminMenu = () => {
                       },
                     }}
                   >
-                    <ComboCard />
+                    <ComboCard showComboEditButton={showComboEditButton} />
                   </Grid>
                 </Paper>
               </Grid>

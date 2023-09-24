@@ -17,7 +17,7 @@ const bull = (
   </Box>
 );
 
-export default function ProdCard({ showEditButton }) {
+export default function ProdCard({ showProdEditButton }) {
   const [productos, setProductos] = useState([]);
   const [productToEdit, setProductToEdit] = useState("");
 
@@ -56,40 +56,51 @@ export default function ProdCard({ showEditButton }) {
             marginTop: 1,
           }}
         >
-          <CardContent sx={{ display: "flex" }}>
-            <Grid sx={{ width: "80%", marginRight: 2 }}>
-              <Typography variant="h6" component="div">
+          <CardContent>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="h6" component="div" sx={{ marginRight: 1 }}>
                 {producto.Nombre}
               </Typography>
-              <Typography variant="subtitle1" component="div">
-                Categoría: {producto.Categoria}
-              </Typography>
-              <Typography
-                variant="body2"
-                component="div"
-                color="text.secondary"
-              >
-                {producto.Descripcion}
-              </Typography>
+              {showProdEditButton && (
+                <EditButton
+                  handleClick={() => {
+                    handleOpenModal();
+                  }}
+                />
+              )}
             </Grid>
-            {showEditButton && (
-              <EditButton
-                handleClick={() => {
-                  handleOpenModal();
-                }}
-              />
-            )}
-            <Grid sx={{ marginTop: 4, width: "20%" }}>
-              <Typography sx={{ fontWeight: "bold", textAlign: "end" }}>
-                {formatCurrency(producto.Precio, "ARS")}
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{ mb: 1.5 }}
-                color="text.secondary"
-              >
-                Unidades mínimas: {producto.Minimo}
-              </Typography>
+            <Grid sx={{ display: "flex" }}>
+              <Grid sx={{ width: "80%", marginRight: 2 }}>
+                <Typography variant="subtitle1" component="div">
+                  Categoría: {producto.Categoria}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  component="div"
+                  color="text.secondary"
+                >
+                  {producto.Descripcion}
+                </Typography>
+              </Grid>
+              <Grid sx={{ marginTop: 1, width: "20%" }}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "end" }}>
+                  {formatCurrency(producto.Precio, "ARS")}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ mb: 1.5 }}
+                  color="text.secondary"
+                >
+                  Unidades mínimas: {producto.Minimo}
+                </Typography>
+              </Grid>
             </Grid>
           </CardContent>
         </Card>

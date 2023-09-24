@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
+import { EditButton } from "../Buttons";
 import serverAPI from "../../api/serverAPI";
 
 const bull = (
@@ -15,7 +16,7 @@ const bull = (
   </Box>
 );
 
-export default function ComboCard() {
+export default function ComboCard({ showComboEditButton }) {
   const [Combos, setCombos] = useState([]);
 
   useEffect(() => {
@@ -53,46 +54,64 @@ export default function ComboCard() {
             marginTop: 1,
           }}
         >
-          <CardContent sx={{ display: "flex" }}>
-            <Grid sx={{ width: "80%", marginRight: 2 }}>
+          <CardContent>
+            <Grid
+              container
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
               <Typography variant="h6" component="div">
                 {combo.Nombre}
               </Typography>
-              <Typography variant="body2" component="div">
-                {combo.Descripcion}
-              </Typography>
-              <Grid display={"flex"}>
-                <Typography
-                  variant="body2"
-                  component="div"
-                  color="text.secondary"
-                  mr={1}
-                >
-                  Composicion:
+              {showComboEditButton && (
+                <EditButton
+                  handleClick={() => {
+                    handleOpenModal();
+                  }}
+                />
+              )}
+            </Grid>
+            <Grid sx={{ display: "flex" }}>
+              <Grid sx={{ width: "80%", marginRight: 2 }}>
+                <Typography variant="body2" component="div">
+                  {combo.Descripcion}
                 </Typography>
-                {combo.Composicion.map((producto, index) => (
+                <Grid display={"flex"}>
                   <Typography
                     variant="body2"
                     component="div"
                     color="text.secondary"
                     mr={1}
                   >
-                    {producto.producto}:{producto.cantidad},
+                    Composicion:
                   </Typography>
-                ))}
+                  {combo.Composicion.map((producto, index) => (
+                    <Typography
+                      variant="body2"
+                      component="div"
+                      color="text.secondary"
+                      mr={1}
+                    >
+                      {producto.producto}:{producto.cantidad},
+                    </Typography>
+                  ))}
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid sx={{ marginTop: 4, width: "20%" }}>
-              <Typography sx={{ fontWeight: "bold", textAlign: "end" }}>
-                {formatCurrency(combo.Precio, "ARS")}
-              </Typography>
-              <Typography
-                variant="caption"
-                sx={{ mb: 1.5 }}
-                color="text.secondary"
-              >
-                Unidades totales: {combo.Cantidad}
-              </Typography>
+              <Grid sx={{ width: "20%" }}>
+                <Typography sx={{ fontWeight: "bold", textAlign: "end" }}>
+                  {formatCurrency(combo.Precio, "ARS")}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  sx={{ mb: 1.5 }}
+                  color="text.secondary"
+                >
+                  Unidades totales: {combo.Cantidad}
+                </Typography>
+              </Grid>
             </Grid>
           </CardContent>
         </Card>
