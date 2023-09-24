@@ -7,10 +7,10 @@ export const Navbar = () => {
     <>
 <nav className="navbar">
       <ul className="navbar-list pt-3 w-100 justify-content-center">
-        <li className="navbar-item"><a href="#">Home</a></li>
-        <li className="navbar-item"><a href="#">Pedido</a></li>
-        <li className="navbar-item"><a href="#">Registro</a></li>
-        <li className="navbar-item"><a href="#">Login</a></li>
+        <li className="navbar-item"><a href="/">Home</a></li>
+        <li className="navbar-item"><a href="Pedidos">Pedidos</a></li>
+        <li className="navbar-item"><a href="Registro">Registro</a></li>
+        <li className="navbar-item"><a href="Login">Login</a></li>
       </ul>
     </nav>
     </>

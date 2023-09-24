@@ -10,8 +10,17 @@ footer {
     background-color: black;
     line-height: 1;
   }
+.bi-facebook{
+  color: #f57c00;
+}
 
+.bi-twitter{
+  color: #f57c00;
+}
 
+.bi-instagram{
+  color: #f57c00;
+}
  /* Navbar.css */
 .navbar {
   background-color: black;
@@ -52,14 +61,17 @@ footer {
   text-align: center;
 }
 
+.backgroundcolor-sections{
+  background-color:#9e9e9e ;
+}
 
+.textcenter{
+  text-align: center;
+}
 
-
-
-
-
-
-
-
-
+p{
+  color: white;
+  text-align: center;
+  
+}
 

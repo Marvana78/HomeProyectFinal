@@ -4,7 +4,7 @@ import React from 'react'
 export const Footer = () => {
   return (
     <div>
-<footer className=" text-light p-3 fixed-bottom">
+<footer>
       <div className="container-fluid mt-3">
         <div className="row text-center">
         <ul className="d-flex justify-content-center list-unstyled mb-4">
