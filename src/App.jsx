@@ -1,17 +1,15 @@
-import { useState } from 'react'
-import { Navbar } from './Components/Navbar'
-import Registro from './Components/Registro'
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Registro from './Components/Registro';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-   <Registro/>
-
+   <Registro />
 
     </>
   )
 }
 
-export default App
+export default App;

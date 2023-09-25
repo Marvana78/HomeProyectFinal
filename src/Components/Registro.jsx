@@ -1,148 +1,110 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './Stylo.css';
 
-const RegistrationForm = () => {
-  const initialFormData = {
-    firstName: '',
-    lastName: '',
-    birthDate: '',
-    age: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  };
 
-  const [formData, setFormData] = useState(initialFormData);
+const Registro = () => {
+  const [nombre, setNombre] = useState('');
+  const [edad, setEdad] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [msjError, setMsjError] = useState('');
 
-  useEffect(() => {
-    // Cargar datos desde localStorage cuando se monta el componente
-    const savedFormData = localStorage.getItem('formData');
-    if (savedFormData) {
-      setFormData(JSON.parse(savedFormData));
-    }
-  }, []);
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const isValidEmail = emailRegex.test(email);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const validarFormulario = (e) => {
     e.preventDefault();
-    if (formData.password === formData.confirmPassword) {
-      // Guardar los datos en localStorage cuando se envía el formulario
-      localStorage.setItem('formData', JSON.stringify(formData));
-      console.log(formData);
-      alert('Registro exitoso');
-      // Reiniciar el formulario después de guardar los datos
-      setFormData(initialFormData);
-    } else {
-      alert('Las contraseñas no coinciden');
+    //aca van las validaciones
+    if (
+      nombre === '' ||
+      edad === '' ||
+      email === '' ||
+      password === '' ||
+      confirmPassword === ''
+    ) {
+      return setMsjError('Todos los campos son obligatorios');
+    } else if (edad < 18) {
+      return setMsjError('el usuario debe ser mayor a 18 años');
+    } else if (nombre.length < 3) {
+      return setMsjError('el usuario debe tener más de 3 caracteres');
+    } else if (!isValidEmail) {
+      return setMsjError('no es un email válido');
+    } else if (password.length < 5) {
+      return setMsjError('la contraseña debe tener más de 5 caracteres');
+    } else if (password !== confirmPassword) {
+      return setMsjError('las contraseñas deben ser iguales');
     }
+
+    setMsjError('Usuario Registrado Correctamente');
   };
 
   return (
-    <Container>
-      <Row>
-        <Col md={{ span: 6, offset: 3 }}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="firstName">
-              <Form.Label>Nombre</Form.Label>
-              <Form.Control
-                type="text"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                maxLength={50}
-                required
-              />
-            </Form.Group>
+    <div className="container">
+      {msjError ? (
+        <p className="bg-danger text-white p-3 text-center">{msjError}</p>
+      ) : (
+        ''
+      )}
+<div className='Body'>
+	<br />
+		<h1 className='container text-center text-primary'>Formulario de Registro</h1><br />
+      <Form onSubmit={validarFormulario}>
+        <Form.Group className="mt-2" controlId="nombre">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ingrese su nombre"
+            onChange={(e) => setNombre(e.target.value)}
+          />
+        </Form.Group>
 
-            <Form.Group controlId="lastName">
-              <Form.Label>Apellido</Form.Label>
-              <Form.Control
-                type="text"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleChange}
-                maxLength={50}
-                required
-              />
-            </Form.Group>
+        <Form.Group className="mt-2" controlId="edad">
+          <Form.Label>Edad</Form.Label>
+          <Form.Control
+            type="number"
+            placeholder="Ingrese su edad"
+            onChange={(e) => setEdad(e.target.value)}
+          />
+        </Form.Group>
 
-            <Form.Group controlId="birthDate">
-              <Form.Label>Fecha de Nacimiento</Form.Label>
-              <Form.Control
-                type="date"
-                name="birthDate"
-                value={formData.birthDate}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
+        <Form.Group className="mt-2" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Ingrese su correo electrónico"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </Form.Group>
 
-            <Form.Group controlId="age">
-              <Form.Label>Edad</Form.Label>
-              <Form.Control
-                type="number"
-                name="age"
-                value={formData.age}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
+        <Form.Group className="mt-2" controlId="contrasena">
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Ingrese su contraseña"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </Form.Group>
 
-            <Form.Group controlId="email">
-              <Form.Label>Correo Electrónico</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                maxLength={100}
-                pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
-                required
-              />
-            </Form.Group>
+        <Form.Group className="mt-2" controlId="confirmarContrasena">
+          <Form.Label>Confirmar Contraseña</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Confirme su contraseña"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </Form.Group>
 
-            <Form.Group controlId="password">
-              <Form.Label>Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                minLength={6}
-                maxLength={50}
-                required
-              />
-            </Form.Group>
+        <Button className="mt-5 w-100 p-2" variant="primary" type="submit">
+          Registrarse
+        </Button>
+      </Form>
 
-            <Form.Group controlId="confirmPassword">
-              <Form.Label>Confirmar Contraseña</Form.Label>
-              <Form.Control
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                minLength={6}
-                maxLength={50}
-                required
-              />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Registrarse
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    </div>
+	</div>
   );
 };
 
-export default RegistrationForm;
+export default Registro;
