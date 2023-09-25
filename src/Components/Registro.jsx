@@ -3,7 +3,6 @@ import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Stylo.css';
 
-
 const Registro = () => {
   const [nombre, setNombre] = useState('');
   const [edad, setEdad] = useState('');
@@ -42,22 +41,26 @@ const Registro = () => {
   };
 
   return (
-    <div className="container">
+    <div className="">
+		
       {msjError ? (
-        <p className="bg-danger text-white p-3 text-center">{msjError}</p>
+        <p className="col-5 mx-auto bg-danger text-white p-3 text-center">{msjError}</p>
       ) : (
         ''
       )}
+	  
 <div className='Body'>
-	<br />
+<br />
 		<h1 className='container text-center text-primary'>Formulario de Registro</h1><br />
+<div className='col-3 mx-auto'>
       <Form onSubmit={validarFormulario}>
-        <Form.Group className="mt-2" controlId="nombre">
+        <Form.Group className="mt-4 " controlId="nombre">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             type="text"
             placeholder="Ingrese su nombre"
             onChange={(e) => setNombre(e.target.value)}
+			
           />
         </Form.Group>
 
@@ -94,13 +97,17 @@ const Registro = () => {
             type="password"
             placeholder="Confirme su contraseña"
             onChange={(e) => setConfirmPassword(e.target.value)}
+
+			
           />
+		  
         </Form.Group>
 
         <Button className="mt-5 w-100 p-2" variant="primary" type="submit">
           Registrarse
         </Button>
       </Form>
+	  </div>
 
     </div>
 	</div>
