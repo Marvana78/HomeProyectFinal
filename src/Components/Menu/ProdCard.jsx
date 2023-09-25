@@ -19,7 +19,18 @@ const bull = (
 
 export default function ProdCard({ showProdEditButton }) {
   const [productos, setProductos] = useState([]);
+  const [open, setOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState("");
+  const [ModalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = (product) => {
+    setProductToEdit(product);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     fetchProductosData();
@@ -40,6 +51,11 @@ export default function ProdCard({ showProdEditButton }) {
       currency: currencyCode,
       minimumFractionDigits: 2,
     }).format(value);
+  };
+
+  const handleEditSuccess = () => {
+    handleModalClose();
+    fetchProductosData();
   };
 
   return (
@@ -69,12 +85,14 @@ export default function ProdCard({ showProdEditButton }) {
                 {producto.Nombre}
               </Typography>
               {showProdEditButton && (
-                <EditButton
-                  handleClick={() => {
-                    handleOpenModal();
-                  }}
-                />
+                <EditButton handleClick={() => handleModalOpen(producto)} />
               )}
+              <EditProdModal
+                open={ModalOpen}
+                onClose={handleModalClose}
+                product={productToEdit}
+                onProductChange={handleEditSuccess}
+              />
             </Grid>
             <Grid sx={{ display: "flex" }}>
               <Grid sx={{ width: "80%", marginRight: 2 }}>

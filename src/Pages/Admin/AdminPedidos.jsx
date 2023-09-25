@@ -17,7 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Skeleton from "@mui/material/Skeleton";
-import { ShowEditButton } from "../../Components/Buttons";
+import { ShowPedidosEditButton } from "../../Components/Buttons";
 import ListItems from "../../Components/Admin/ListItems";
 
 const drawerWidth = 240;
@@ -177,7 +177,7 @@ const AdminPedidos = () => {
                     }}
                   >
                     <h2 className="titulo my-3">Pedidos Activos</h2>
-                    <ShowEditButton />
+                    <ShowPedidosEditButton />
                   </Grid>
                   <Divider
                     sx={{ backgroundColor: "#f57c00", borderWidth: 1.5 }}

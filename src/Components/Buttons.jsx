@@ -30,7 +30,7 @@ export function AddButton({ handleClick, id }) {
 }
 
 export function ShowComboEditButton({ setShowComboEditButton }) {
-  const [EditState, setEditState] = useState(false);
+  const [EditState, setEditState] = useState(true);
 
   return (
     <div>
@@ -55,7 +55,7 @@ export function ShowComboEditButton({ setShowComboEditButton }) {
 }
 
 export function ShowProdEditButton({ setShowProdEditButton }) {
-  const [EditState, setEditState] = useState(false);
+  const [EditState, setEditState] = useState(true);
 
   return (
     <div>
@@ -69,6 +69,56 @@ export function ShowProdEditButton({ setShowProdEditButton }) {
         }}
         onClick={() => {
           setShowProdEditButton(EditState);
+          setEditState(!EditState);
+          console.log(EditState);
+        }}
+      >
+        Editar
+      </Button>
+    </div>
+  );
+}
+
+export function ShowUserEditButton({ setShowUserEditButton }) {
+  const [EditState, setEditState] = useState(true);
+
+  return (
+    <div>
+      <Button
+        variant="outlined"
+        startIcon={<EditIcon />}
+        style={{
+          marginTop: 17,
+          marginLeft: 10,
+          borderColor: "#f57c00",
+        }}
+        onClick={() => {
+          setShowUserEditButton(EditState);
+          setEditState(!EditState);
+          console.log(EditState);
+        }}
+      >
+        Editar
+      </Button>
+    </div>
+  );
+}
+
+export function ShowPedidosEditButton({ setShowPedidosEditButton }) {
+  const [EditState, setEditState] = useState(false);
+
+  return (
+    <div>
+      <Button
+        variant="outlined"
+        startIcon={<EditIcon />}
+        style={{
+          marginTop: 17,
+          marginLeft: 10,
+          borderColor: "#f57c00",
+        }}
+        onClick={() => {
+          setShowPedidosEditButton(EditState);
           setEditState(!EditState);
           console.log(EditState);
         }}
