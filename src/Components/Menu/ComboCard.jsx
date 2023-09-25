@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { EditButton } from "../Buttons";
+import EditComboModal from "./EditComboModal";
 import serverAPI from "../../api/serverAPI";
 
 const bull = (
@@ -18,6 +19,18 @@ const bull = (
 
 export default function ComboCard({ showComboEditButton }) {
   const [Combos, setCombos] = useState([]);
+  const [open, setOpen] = useState(false);
+  const [comboToEdit, setComboToEdit] = useState("");
+  const [ModalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = (combo) => {
+    setComboToEdit(combo);
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
+  };
 
   useEffect(() => {
     fetchCombosData();
@@ -38,6 +51,11 @@ export default function ComboCard({ showComboEditButton }) {
       currency: currencyCode,
       minimumFractionDigits: 2,
     }).format(value);
+  };
+
+  const handleEditSuccess = () => {
+    handleModalClose();
+    fetchCombosData();
   };
 
   return (
@@ -69,10 +87,16 @@ export default function ComboCard({ showComboEditButton }) {
               {showComboEditButton && (
                 <EditButton
                   handleClick={() => {
-                    handleOpenModal();
+                    handleModalOpen(combo);
                   }}
                 />
               )}
+              <EditComboModal
+                open={ModalOpen}
+                onClose={handleModalClose}
+                combo={comboToEdit}
+                onProductChange={handleEditSuccess}
+              />
             </Grid>
             <Grid sx={{ display: "flex" }}>
               <Grid sx={{ width: "80%", marginRight: 2 }}>

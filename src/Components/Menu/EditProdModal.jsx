@@ -65,6 +65,14 @@ const EditProdModal = ({ open, onClose, onProductChange, product }) => {
     },
   ];
 
+  const SwAlert = () => {
+    swal({
+      title: "¡Éxito!",
+      text: "El producto se agregó correctamente",
+      icon: "success",
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -78,34 +86,19 @@ const EditProdModal = ({ open, onClose, onProductChange, product }) => {
       return;
     }
 
-    swal({
-      title: "¿Desea guardar los cambios?",
-      text: "Una vez guardados, los cambios serán permanentes",
-      icon: "warning",
-      buttons: ["Cancelar", "Guardar"],
-      dangerMode: true,
-    }).then((willSave) => {
-      if (willSave) {
-        try {
-          serverAPI.put(`/prod/EditProd/${product._id}`, {
-            Categoria: categoria,
-            Descripcion: descripcion,
-            Nombre: nombre,
-            Precio: precio,
-            Minimo: minimo,
-          });
+    try {
+      await serverAPI.put(`/prod/EditProd/${product._id}`, {
+        Categoria: categoria,
+        Descripcion: descripcion,
+        Nombre: nombre,
+        Precio: precio,
+      });
 
-          swal("¡Producto editado con éxito!", {
-            icon: "success",
-          });
-
-          onProductChange();
-          onClose();
-        } catch (error) {
-          console.error("Error al editar la operación:", error);
-        }
-      }
-    });
+      onProductChange();
+      onClose();
+    } catch (error) {
+      console.error("Error al editar el producto:", error);
+    }
   };
 
   const deleteProd = async (_id) => {
@@ -241,7 +234,7 @@ const EditProdModal = ({ open, onClose, onProductChange, product }) => {
           </Grid>
           <Grid container>
             <Button
-              variant="outlined"
+              variant="contained"
               color="error"
               sx={{ mt: 3, mb: 2, width: "20%" }}
               onClick={() => SwAlertDelete(product._id)}

@@ -32,10 +32,6 @@ export default function ProdCard({ showProdEditButton }) {
     setModalOpen(false);
   };
 
-  useEffect(() => {
-    fetchProductosData();
-  }, []);
-
   const fetchProductosData = async () => {
     try {
       const resp = await serverAPI.get("/prod/GetProd");
@@ -44,6 +40,10 @@ export default function ProdCard({ showProdEditButton }) {
       console.error("Error fetching data:", error);
     }
   };
+
+  useEffect(() => {
+    fetchProductosData();
+  }, []);
 
   const formatCurrency = (value, currencyCode) => {
     return new Intl.NumberFormat("en-US", {

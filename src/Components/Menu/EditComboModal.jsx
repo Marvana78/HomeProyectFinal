@@ -14,7 +14,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import serverAPI from "../../api/serverAPI";
 
-const AddComboModal = ({ open, onClose }) => {
+const EditComboModal = ({ open, onClose, onProductChange, combo }) => {
   const [Cantidad, setCantidad] = useState("");
   const [Descripcion, setDescripcion] = useState("");
   const [Precio, setPrecio] = useState("");
@@ -25,29 +25,15 @@ const AddComboModal = ({ open, onClose }) => {
   const [productQuantity, setProductQuantity] = useState("");
   const [selectedProduct, setSelectedProduct] = useState([]);
 
-  const comboNuevo = async (
-    Cantidad,
-    Descripcion,
-    Nombre,
-    Precio,
-    Composicion
-  ) => {
-    try {
-      const resp = await serverAPI.post("/combo/AddCombo", {
-        Cantidad,
-        Descripcion,
-        Nombre,
-        Precio,
-        Composicion,
-      });
-
-      console.log(resp);
-      SwAlert();
-      onClose();
-    } catch (error) {
-      SwAlertErrorFondos();
+  useEffect(() => {
+    if (combo) {
+      setNombre(combo.Nombre || "");
+      setDescripcion(combo.Descripcion || "");
+      setPrecio(combo.Precio || "");
+      setCantidad(combo.Cantidad || "");
+      setProductosElegidos(combo.Composicion || []);
     }
-  };
+  }, [combo]);
 
   const SwAlert = () => {
     swal({
@@ -57,7 +43,7 @@ const AddComboModal = ({ open, onClose }) => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (
@@ -66,29 +52,57 @@ const AddComboModal = ({ open, onClose }) => {
       Nombre === "" ||
       Precio === ""
     ) {
-      return console.log("todos los campos son obligatorios");
+      console.log("Todos los campos son obligatorios");
+      return;
     }
 
-    const composicion = productosElegidos.map((producto) => ({
-      producto: producto.nombre,
-      cantidad: producto.cantidad,
-    }));
+    try {
+      await serverAPI.put(`/combo/EditCombo/${combo._id}`, {
+        Descripcion: Descripcion,
+        Nombre: Nombre,
+        Precio: Precio,
+        Cantidad: Cantidad,
+        Composicion: Composicion,
+      });
 
-    const cantidadTotal = calcularTotalCantidadProductos();
-    console.log("Cantidad Total:", cantidadTotal);
+      onProductChange();
+      onClose();
+    } catch (error) {
+      console.error("Error al editar el combo:", error);
+    }
+  };
 
-    console.log(Descripcion);
-    console.log(Precio);
-    console.log(Nombre);
-    console.log(Composicion);
+  const deleteCombo = async (_id) => {
+    try {
+      const deleteResp = await serverAPI.delete(`/combo/DeleteCombo/${_id}`);
 
-    comboNuevo(cantidadTotal, Descripcion, Nombre, Precio, composicion);
+      if (deleteResp.data.message === "Combo deleted successfully") {
+        console.log(deleteResp);
+      } else {
+        console.log("Cancel operation failed.");
+      }
+      onProductChange();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-    setComposicion([]);
-    setDescripcion("");
-    setNombre("");
-    setPrecio("");
-    setCantidad("");
+  const SwAlertDelete = (_id) => {
+    swal({
+      title: "¿Desea borrar el combo?",
+      text: "Una vez borrado, este no podrá ser recuperado",
+      icon: "warning",
+      buttons: ["No", "Sí"],
+      dangerMode: true,
+    }).then((willCancel) => {
+      if (willCancel) {
+        swal("¡Combo borrado con éxito!", {
+          icon: "success",
+        });
+        deleteCombo(_id);
+        onClose();
+      }
+    });
   };
 
   useEffect(() => {
@@ -115,7 +129,6 @@ const AddComboModal = ({ open, onClose }) => {
     );
 
     if (productoExistente) {
-      // Sumar la cantidad al producto existente
       const productosActualizados = productosElegidos.map((producto) => {
         if (producto._id === selectedProduct._id) {
           return {
@@ -128,7 +141,6 @@ const AddComboModal = ({ open, onClose }) => {
 
       setProductosElegidos(productosActualizados);
     } else {
-      // Agregar un nuevo producto
       const nuevoProducto = {
         _id: selectedProduct._id,
         nombre: selectedProduct.Nombre,
@@ -179,7 +191,7 @@ const AddComboModal = ({ open, onClose }) => {
       >
         <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="h4" mb={1}>
-            Crear combo
+            Editar combo
           </Typography>
           <HighlightOffIcon
             onClick={onClose}
@@ -198,6 +210,7 @@ const AddComboModal = ({ open, onClose }) => {
                 <OutlinedInput
                   id="ComboNombre"
                   label="Nombre"
+                  value={Nombre}
                   onChange={(e) => setNombre(e.target.value)}
                 />
               </FormControl>
@@ -208,6 +221,7 @@ const AddComboModal = ({ open, onClose }) => {
                 className="mt-3"
                 id="ComboDescripcion"
                 label="Descripción"
+                value={Descripcion}
                 multiline
                 rows={4}
                 defaultValue=""
@@ -310,6 +324,7 @@ const AddComboModal = ({ open, onClose }) => {
                 <OutlinedInput
                   id="outlined-adornment-amount"
                   label="Precio"
+                  value={Precio}
                   onChange={(e) => setPrecio(e.target.value)}
                 />
               </FormControl>
@@ -318,12 +333,21 @@ const AddComboModal = ({ open, onClose }) => {
         </Grid>
         <Grid container justifyContent={"end"}>
           <Button
+            variant="contained"
+            color="error"
+            sx={{ mt: 3, mb: 2, width: "25%" }}
+            onClick={() => SwAlertDelete(product._id)}
+          >
+            Borrar producto
+          </Button>
+          <Button
             type="submit"
             variant="contained"
-            sx={{ mt: 3, mb: 2, width: "20%" }}
+            sx={{ mt: 3, mb: 2, ml: 2, width: "25%" }}
+            id="EditProd"
             onClick={handleSubmit}
           >
-            Crear combo
+            Guardar cambios
           </Button>
         </Grid>
       </Paper>
@@ -331,4 +355,4 @@ const AddComboModal = ({ open, onClose }) => {
   );
 };
 
-export default AddComboModal;
+export default EditComboModal;
