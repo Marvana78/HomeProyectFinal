@@ -336,7 +336,7 @@ const EditComboModal = ({ open, onClose, onProductChange, combo }) => {
             variant="contained"
             color="error"
             sx={{ mt: 3, mb: 2, width: "25%" }}
-            onClick={() => SwAlertDelete(product._id)}
+            onClick={() => SwAlertDelete(combo._id)}
           >
             Borrar producto
           </Button>

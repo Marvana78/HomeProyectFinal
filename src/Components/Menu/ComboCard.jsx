@@ -17,7 +17,7 @@ const bull = (
   </Box>
 );
 
-export default function ComboCard({ showComboEditButton }) {
+export default function ComboCard({ showComboEditButton, onAddCombo }) {
   const [Combos, setCombos] = useState([]);
   const [open, setOpen] = useState(false);
   const [comboToEdit, setComboToEdit] = useState("");
@@ -34,7 +34,7 @@ export default function ComboCard({ showComboEditButton }) {
 
   useEffect(() => {
     fetchCombosData();
-  }, []);
+  }, [onAddCombo]);
 
   const fetchCombosData = async () => {
     try {

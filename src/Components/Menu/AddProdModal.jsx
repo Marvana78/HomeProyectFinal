@@ -15,7 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 import serverAPI from "../../api/serverAPI";
 
-const AddProdModal = ({ open, onClose }) => {
+const AddProdModal = ({ open, onClose, onAddProd }) => {
   const [Categoria, setCategoria] = useState("");
   const [Descripcion, setDescripcion] = useState("");
   const [Precio, setPrecio] = useState("");
@@ -38,12 +38,10 @@ const AddProdModal = ({ open, onClose }) => {
         Minimo,
       });
 
-      console.log(resp);
       SwAlert();
       onClose();
-    } catch (error) {
-      SwAlertErrorFondos();
-    }
+      onAddProd();
+    } catch (error) {}
   };
 
   const categorias = [
@@ -96,7 +94,8 @@ const AddProdModal = ({ open, onClose }) => {
       Categoria === "" ||
       Descripcion === "" ||
       Nombre === "" ||
-      Precio === ""
+      Precio === "" ||
+      Minimo === ""
     ) {
       return console.log("todos los campos son obligatorios");
     }

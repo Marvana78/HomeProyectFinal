@@ -89,6 +89,8 @@ const AdminMenu = () => {
   const [comboModalOpen, setComboModalOpen] = useState(false);
   const [showComboEditButton, setShowComboEditButton] = useState(false);
   const [showProdEditButton, setShowProdEditButton] = useState(false);
+  const [onAddProd, setOnAddProd] = useState(false);
+  const [onAddCombo, setOnAddCombo] = useState(false);
 
   const handleProdModalOpen = () => {
     setProdModalOpen(true);
@@ -104,6 +106,14 @@ const AdminMenu = () => {
 
   const handleComboModalClose = () => {
     setComboModalOpen(false);
+  };
+
+  const handleAddProd = () => {
+    setOnAddProd(!onAddProd);
+  };
+
+  const handleAddCombo = () => {
+    setOnAddCombo(!onAddCombo);
   };
 
   useEffect(() => {
@@ -214,6 +224,7 @@ const AdminMenu = () => {
                       <AddProdModal
                         open={prodModalOpen}
                         onClose={handleProdModalClose}
+                        onAddProd={handleAddProd}
                       />
                     </Grid>
                   </Grid>
@@ -237,7 +248,10 @@ const AdminMenu = () => {
                       },
                     }}
                   >
-                    <ProdCard showProdEditButton={showProdEditButton} />
+                    <ProdCard
+                      showProdEditButton={showProdEditButton}
+                      onAddProd={handleAddProd}
+                    />
                   </Grid>
                 </Paper>
               </Grid>
@@ -271,6 +285,7 @@ const AdminMenu = () => {
                       <AddComboModal
                         open={comboModalOpen}
                         onClose={handleComboModalClose}
+                        onAddCombo={handleAddCombo}
                       />
                     </Grid>
                   </Grid>
@@ -294,7 +309,10 @@ const AdminMenu = () => {
                       },
                     }}
                   >
-                    <ComboCard showComboEditButton={showComboEditButton} />
+                    <ComboCard
+                      showComboEditButton={showComboEditButton}
+                      onAddCombo={handleAddCombo}
+                    />
                   </Grid>
                 </Paper>
               </Grid>

@@ -14,7 +14,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import serverAPI from "../../api/serverAPI";
 
-const AddComboModal = ({ open, onClose }) => {
+const AddComboModal = ({ open, onClose, onAddCombo }) => {
   const [Cantidad, setCantidad] = useState("");
   const [Descripcion, setDescripcion] = useState("");
   const [Precio, setPrecio] = useState("");
@@ -41,12 +41,10 @@ const AddComboModal = ({ open, onClose }) => {
         Composicion,
       });
 
-      console.log(resp);
       SwAlert();
       onClose();
-    } catch (error) {
-      SwAlertErrorFondos();
-    }
+      onAddCombo();
+    } catch (error) {}
   };
 
   const SwAlert = () => {

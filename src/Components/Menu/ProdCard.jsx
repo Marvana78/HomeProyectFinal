@@ -17,7 +17,7 @@ const bull = (
   </Box>
 );
 
-export default function ProdCard({ showProdEditButton }) {
+export default function ProdCard({ showProdEditButton, onAddProd }) {
   const [productos, setProductos] = useState([]);
   const [open, setOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState("");
@@ -43,7 +43,7 @@ export default function ProdCard({ showProdEditButton }) {
 
   useEffect(() => {
     fetchProductosData();
-  }, []);
+  }, [onAddProd]);
 
   const formatCurrency = (value, currencyCode) => {
     return new Intl.NumberFormat("en-US", {
