@@ -289,7 +289,7 @@ const EditComboModal = ({ open, onClose, onProductChange, combo }) => {
               variant="outlined"
               value={Composicion.map(
                 (producto, index) =>
-                  `${producto.nombre} - Cantidad: ${producto.cantidad}\n`
+                  `${producto.producto} - Cantidad: ${producto.cantidad}\n`
               ).join("")}
               InputProps={{
                 readOnly: true,
