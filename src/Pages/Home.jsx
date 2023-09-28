@@ -9,6 +9,10 @@ import image6 from '../assets/img/urakamakis.png';
 import videoSource from '../video/Taky.mp4';
 import videoSource2 from '../video/serietaky.mp4';
 
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
+
+
 const cardStyle = {
   border: '1px solid #ccc',
   borderRadius: '8px',
@@ -85,6 +89,7 @@ export const Home = () => {
  
   return (
     <>
+    <Navbar/>
     <section>
 <div className="video-container">
         <video controls autoPlay loop style={videoStyle}>
@@ -153,6 +158,7 @@ export const Home = () => {
         </div>
       </section>
       </section>
+      <Footer/>
     </>
   )
 }
