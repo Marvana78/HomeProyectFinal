@@ -1,13 +1,20 @@
 import React from 'react';
 
-const UserList = ({ users }) => {
+const UserList = ({ users, setShowEditForm, setSelectedUser, toggleUserStatus }) => {
+  const handleEdit = (user) => {
+    setSelectedUser(user);
+    setShowEditForm(true);
+  };
+
   return (
     <div>
       <h2>Usuarios Activos</h2>
       <ul>
-        {users.map((user, index) => (
+        {users.filter(user => user.isActive).map((user, index) => (
           <li key={index}>
-            {user.name} <button>Inactivar</button>
+            {user.name}
+            <button onClick={() => handleEdit(user)}>Editar</button>
+            <button onClick={() => toggleUserStatus(user.id)}>Inactivar</button>
           </li>
         ))}
       </ul>
