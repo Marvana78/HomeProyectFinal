@@ -26,6 +26,11 @@ footer {
   background-color: black;
 }
 
+
+.nav-link:hover {
+  color: #f57c00 !important; 
+}
+
 .imagenlogo {
   text-align: center;
 }

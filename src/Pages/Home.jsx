@@ -8,9 +8,9 @@ import image5 from '../assets/img/sake.png';
 import image6 from '../assets/img/urakamakis.png';
 import videoSource from '../video/Taky.mp4';
 import videoSource2 from '../video/serietaky.mp4';
-
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
+import { Button } from 'react-bootstrap';
 
 
 const cardStyle = {
@@ -85,6 +85,7 @@ const secondVideoStyle = {
 
 const secondVideoMarginBottom = '80px'; 
 
+
 export const Home = () => {
  
   return (
@@ -115,48 +116,46 @@ export const Home = () => {
         <img src={image1} alt='Imagen 1' style={imageStyle} />
         <p style={descriptionStyle}>2 maguro, 2 sake de salmón, 1 avocado, 3 ebi, 2 tako.</p>
         <p className="lh-1 fw-bold" >Total: $5.400</p>
-        <a href='#' style={buttonStyle}>Comprar</a>
+        <Button style={buttonStyle}>Agregar</Button>
       </div>
       <div style={cardStyle}>
         <img src={image2} alt='Imagen 2' style={imageStyle} />
         <p style={descriptionStyle}>10 makis de salmón, 10 tuna rolls, 5 kani maki, 5 sashimi.</p>
         <p className="lh-1 fw-bold" >Total: $8.500</p>
-        <a href='#' style={buttonStyle}>Comprar</a>
+        <Button style={buttonStyle}>Agregar</Button>
       </div>
       <div style={cardStyle}>
         <img src={image3} alt='Imagen 3' style={imageStyle} />
         <p style={descriptionStyle}>Rollo de arroz envuelto c/salmón rosado</p>
         <p className="lh-1 fw-bold" >Total: $3.500</p>
-        <a href='#' style={buttonStyle}>Comprar</a>
+        <Button style={buttonStyle}>Agregar</Button>
       </div>
       <div style={cardStyle}>
         <img src={image4} alt='Imagen 4' style={imageStyle} />
         <p style={descriptionStyle}>Rollo de arroz envuelto c/alga nori</p>
         <p className="lh-1 fw-bold" >Total: $2.800</p>
-        <a href='#' style={buttonStyle}>Comprar</a>
+        <Button style={buttonStyle}>Agregar</Button>
       </div>
       <div style={cardStyle}>
         <img src={image5} alt='Imagen 5' style={imageStyle} />
         <p style={descriptionStyle}>Arroz cubierto c/salmón</p>
         <p className="lh-1 fw-bold" >Total: $4.200</p>
-        <a href='#' style={buttonStyle}>Comprar</a>
+        <Button style={buttonStyle}>Agregar</Button>
       </div>
       <div style={cardStyle}>
         <img src={image6} alt='Imagen 6' style={imageStyle} />
         <p style={descriptionStyle}>Rollo invertido c/arroz o alga nori</p>
         <p className="lh-1 fw-bold" >Total: $ 3.100</p>
-        <a href='#' style={buttonStyle}>Comprar</a>
+        <Button style={buttonStyle}>Agregar</Button>
       </div>
     </div>
     </section>
-    <section>
     <section>
         <div className="video-container" style={{ ...videoContainerStyle, marginBottom: secondVideoMarginBottom }}>
           <video controls autoPlay loop style={videoStyle}>
             <source src={videoSource2} type="video/mp4" />
           </video>
         </div>
-      </section>
       </section>
       <Footer/>
     </>
