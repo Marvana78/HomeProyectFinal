@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import UserForm from './Components/UserForm';
 import UserList from './Components/UserList';
+import './CSS/styles.css'
 
 function App() {
   const [showForm, setShowForm] = useState(false);
