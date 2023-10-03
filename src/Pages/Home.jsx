@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import imageBetweenVideoAndCards from '../assets/img/logomenu.png';
 import image1 from '../assets/img/combinadonigiri.png';
 import image2 from '../assets/img/combinadomacky.png';
@@ -11,6 +11,7 @@ import videoSource2 from '../video/serietaky.mp4';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import { Button } from 'react-bootstrap';
+import serverAPI from '../api/serverAPI';
 
 
 const cardStyle = {
@@ -87,6 +88,24 @@ const secondVideoMarginBottom = '80px';
 
 
 export const Home = () => {
+
+  const [cargarProductos, setCargarProductos] = useState([]);
+ 
+  const cargarProducto = async () => {
+
+try {
+  const resp = await serverAPI.get('/prod/GetProd');
+  
+  setCargarProductos(resp.data)
+} catch (error) {
+  console.error(error);
+}
+
+  };
+
+useEffect(() =>{
+  cargarProducto();
+},[]);
  
   return (
     <>
@@ -111,13 +130,17 @@ export const Home = () => {
     }}
   />
 </div>
+
   <div className='d-flex justify-content-center align-items-center flex-wrap my-5 backgroundcolor-sections p-5'>
-      <div style={cardStyle}>
-        <img src={image1} alt='Imagen 1' style={imageStyle} />
-        <p style={descriptionStyle}>2 maguro, 2 sake de salmón, 1 avocado, 3 ebi, 2 tako.</p>
-        <p className="lh-1 fw-bold" >Total: $5.400</p>
-        <Button style={buttonStyle}>Agregar</Button>
-      </div>
+  {cargarProductos.map((producto) => (
+    <div key={producto._id} style={cardStyle}>
+      <img src={image1} alt={`Imagen ${producto._id}`} style={imageStyle} />
+      <p style={descriptionStyle}>{producto.Descripcion}</p>
+      <p className="lh-1 fw-bold">Total: ${producto.Precio}</p>
+      <Button style={buttonStyle}>Agregar</Button>
+    </div>
+  ))}
+
       <div style={cardStyle}>
         <img src={image2} alt='Imagen 2' style={imageStyle} />
         <p style={descriptionStyle}>10 makis de salmón, 10 tuna rolls, 5 kani maki, 5 sashimi.</p>
@@ -148,6 +171,7 @@ export const Home = () => {
         <p className="lh-1 fw-bold" >Total: $ 3.100</p>
         <Button style={buttonStyle}>Agregar</Button>
       </div>
+
     </div>
     </section>
     <section>
