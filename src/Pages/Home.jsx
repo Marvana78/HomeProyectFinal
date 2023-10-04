@@ -96,7 +96,7 @@ export const Home = () => {
 try {
   const resp = await serverAPI.get('/prod/GetProd');
   
-  setCargarProductos(resp.data)
+  setCargarProductos(resp.data);
 } catch (error) {
   console.error(error);
 }
