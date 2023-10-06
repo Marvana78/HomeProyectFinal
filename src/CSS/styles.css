@@ -37,4 +37,9 @@ body {
   .text-secondary {
     color: rgba(0, 0, 0, 0.87); /* Gris Secundario */
   }
-  
+  /* Estilos para mensajes de error */
+.error {
+  color: #f44336; /* Color rojo para los errores */
+  font-size: 14px;
+  margin-top: 4px; /* Espacio superior para separar los mensajes de los campos */
+}
