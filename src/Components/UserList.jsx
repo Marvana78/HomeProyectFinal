@@ -19,10 +19,7 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
       });
   }, []);
 
-  const handleEdit = (user) => {
-    setSelectedUser(user);
-    setShowEditForm(true);
-  };
+
 
   const toggleUserStatus = (userId) => {
     // Realiza una solicitud PUT para inactivar al usuario
@@ -47,6 +44,35 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
     });
   };
 
+  const handleEdit = (user) => {
+    setSelectedUser(user);
+    setShowEditForm(true);
+    const updatedUser = user;
+  
+  
+    fetch(`${BASE_URL}/api/users/edit/${user._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedUser)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al editar al usuario');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Actualizar la lista de usuarios con la información actualizada
+      const updatedUsers = users.map(u => u._id === user._id ? { ...u, ...updatedUser } : u);
+      setUsers(updatedUsers);
+    })
+    .catch(error => {
+      console.error('Error al editar al usuario:', error);
+    });
+  };
+    
   return (
     <div className="container">
       <h2>Usuarios Activos</h2>
