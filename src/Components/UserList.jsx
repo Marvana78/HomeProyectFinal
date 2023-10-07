@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { BASE_URL } from './apiConfig.js'; // Importa la URL base
 
-const UserList = ({ setShowEditForm, setSelectedUser, toggleUserStatus }) => {
+const UserList = ({ setShowEditForm, setSelectedUser }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     // Realiza una solicitud GET al backend para obtener la lista de usuarios
     fetch(`${BASE_URL}/api/users`)
-      .then((response) => {
-        console.log("Respuesta del servidor:", response); // Nueva línea de diagnóstico
+      .then(response => {
         if (!response.ok) {
           throw new Error('Error al obtener la lista de usuarios');
         }
         return response.json();
       })
-      .then((data) => {
-        console.log("Data recibida:", data); // Nueva línea de diagnóstico
-        setUsers(data);
-      })
-      .catch((error) => {
+      .then(data => setUsers(data))
+      .catch(error => {
         console.error('Error al obtener la lista de usuarios:', error);
       });
   }, []);
@@ -26,6 +22,29 @@ const UserList = ({ setShowEditForm, setSelectedUser, toggleUserStatus }) => {
   const handleEdit = (user) => {
     setSelectedUser(user);
     setShowEditForm(true);
+  };
+
+  const toggleUserStatus = (userId) => {
+    // Realiza una solicitud PUT para inactivar al usuario
+    fetch(`${BASE_URL}/api/users/deactivate/${userId}`, {
+      method: 'PUT'
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Error al inactivar al usuario');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Actualizar la lista de usuarios con el estado actualizado
+      const updatedUsers = users.map(user => 
+        user._id === userId ? { ...user, isActive: false } : user
+      );
+      setUsers(updatedUsers);
+    })
+    .catch(error => {
+      console.error('Error al inactivar al usuario:', error);
+    });
   };
 
   return (
@@ -50,7 +69,7 @@ const UserList = ({ setShowEditForm, setSelectedUser, toggleUserStatus }) => {
                 <td>{user.role}</td>
                 <td>
                   <button onClick={() => handleEdit(user)}>Editar</button>
-                  <button onClick={() => toggleUserStatus(user.id)}>Inactivar</button>
+                  <button onClick={() => toggleUserStatus(user._id)}>Inactivar</button> {/* Línea corregida */}
                 </td>
               </tr>
             ))}
