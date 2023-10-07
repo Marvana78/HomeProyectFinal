@@ -8,7 +8,8 @@ const UserManagement = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
+  useEffect(() => { 
+    reloadUsers();
     fetch('http://localhost:4000/api/users')
       .then(response => {
         if (!response.ok) {
@@ -23,7 +24,21 @@ const UserManagement = () => {
         console.error('Error al obtener la lista de usuarios:', error);
       });
   }, []);
-
+  const reloadUsers = () => {
+    fetch('http://localhost:4000/api/users')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al obtener la lista de usuarios');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setUsers(data);
+      })
+      .catch(error => {
+        console.error('Error al obtener la lista de usuarios:', error);
+      });
+  };
   const addUser = (newUser) => {
     setUsers([...users, newUser]);
   };
@@ -49,6 +64,7 @@ const UserManagement = () => {
       {showEditForm && <UserForm user={selectedUser} editUser={editUser} />}
       <UserList
         users={users}
+        reloadUsers={reloadUsers}
         setShowEditForm={setShowEditForm}
         setSelectedUser={setSelectedUser}
         toggleUserStatus={toggleUserStatus}

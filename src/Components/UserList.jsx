@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BASE_URL } from './apiConfig.js';
 
-const UserList = ({ setShowEditForm, setSelectedUser, users }) => {
+const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
   const [editedUser, setEditedUser] = useState(null);  // Estado para el usuario que se está editando
   const [successMessage, setSuccessMessage] = useState("");  // Estado para el mensaje de éxito
 
@@ -19,10 +19,7 @@ const UserList = ({ setShowEditForm, setSelectedUser, users }) => {
           return response.json();
         })
         .then(data => {
-          const updatedUsers = localUsers.map(user => 
-            user._id === userId ? { ...user, isActive: false } : user
-          );
-          setLocalUsers(updatedUsers);
+          reloadUsers(); // Llamar a la función para recargar los usuarios
         })
         .catch(error => {
           console.error('Error al inactivar al usuario:', error);
