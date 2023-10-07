@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BASE_URL } from './apiConfig.js';
 
-const UserList = ({ setShowEditForm, setSelectedUser }) => {
-  const [users, setUsers] = useState([]);
+const UserList = ({ setShowEditForm, setSelectedUser, users }) => {
   const [editedUser, setEditedUser] = useState(null);  // Estado para el usuario que se está editando
   const [successMessage, setSuccessMessage] = useState("");  // Estado para el mensaje de éxito
 
-  useEffect(() => {
-    fetch(`${BASE_URL}/api/users`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Error al obtener la lista de usuarios');
-        }
-        return response.json();
-      })
-      .then(data => setUsers(data))
-      .catch(error => {
-        console.error('Error al obtener la lista de usuarios:', error);
-      });
-  }, []);
+  
 
   const toggleUserStatus = (userId) => {
     if (window.confirm("¿Estás seguro de que quieres inactivar este usuario?")) {
@@ -32,10 +19,10 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
           return response.json();
         })
         .then(data => {
-          const updatedUsers = users.map(user =>
+          const updatedUsers = localUsers.map(user => 
             user._id === userId ? { ...user, isActive: false } : user
           );
-          setUsers(updatedUsers);
+          setLocalUsers(updatedUsers);
         })
         .catch(error => {
           console.error('Error al inactivar al usuario:', error);
@@ -74,8 +61,8 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
           return response.json();
         })
         .then(data => {
-          const updatedUsers = users.map(u => u._id === editedUser._id ? { ...u, ...editedUser } : u);
-          setUsers(updatedUsers);
+          const updatedUsers = localUsers.map(u => u._id === editedUser._id ? { ...u, ...editedUser } : u);
+          setLocalUsers(updatedUsers);
           setShowEditForm(false);  // Ocultar el formulario después de guardar
           setSuccessMessage("Cambios guardados con éxito.");
           setTimeout(() => setSuccessMessage(""), 3000);
@@ -144,7 +131,7 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
           </tr>
         </thead>
         <tbody>
-          {users
+          {users // Usar directamente la prop "users"
             .filter((user) => user.isActive)
             .map((user, index) => (
               <tr key={user._id}>
