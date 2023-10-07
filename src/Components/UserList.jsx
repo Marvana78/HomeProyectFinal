@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { BASE_URL } from './apiConfig.js'; // Importa la URL base
+import { BASE_URL } from './apiConfig.js';
 
 const UserList = ({ setShowEditForm, setSelectedUser }) => {
   const [users, setUsers] = useState([]);
+  const [editedUser, setEditedUser] = useState(null);  // Estado para el usuario que se está editando
 
   useEffect(() => {
-    // Realiza una solicitud GET al backend para obtener la lista de usuarios
     fetch(`${BASE_URL}/api/users`)
       .then(response => {
         if (!response.ok) {
@@ -19,49 +19,48 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
       });
   }, []);
 
-
-
   const toggleUserStatus = (userId) => {
-    // Realiza una solicitud PUT para inactivar al usuario
     fetch(`${BASE_URL}/api/users/deactivate/${userId}`, {
       method: 'PUT'
     })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Error al inactivar al usuario');
-      }
-      return response.json();
-    })
-    .then(data => {
-      // Actualizar la lista de usuarios con el estado actualizado
-      const updatedUsers = users.map(user => 
-        user._id === userId ? { ...user, isActive: false } : user
-      );
-      setUsers(updatedUsers);
-    })
-    .catch(error => {
-      console.error('Error al inactivar al usuario:', error);
-    });
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error al inactivar al usuario');
+        }
+        return response.json();
+      })
+      .then(data => {
+        const updatedUsers = users.map(user =>
+          user._id === userId ? { ...user, isActive: false } : user
+        );
+        setUsers(updatedUsers);
+      })
+      .catch(error => {
+        console.error('Error al inactivar al usuario:', error);
+      });
   };
 
   const handleEdit = (user) => {
     setSelectedUser(user);
     setShowEditForm(true);
-  const userEdit = user;
-  editUserfunction(userEdit);
+    setEditedUser(user);  // Establecer el usuario que se está editando
   };
-    
-  const editUserfunction =(user) => {
-    const updatedUser = user;
-    updatedUser.name="son 8k";
-    
-      fetch(`${BASE_URL}/api/users/edit/${user._id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedUser)
-      })
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setEditedUser(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSaveEdit = () => {
+    if (!editedUser) return;
+
+    fetch(`${BASE_URL}/api/users/edit/${editedUser._id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editedUser)
+    })
       .then(response => {
         if (!response.ok) {
           throw new Error('Error al editar al usuario');
@@ -69,18 +68,60 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
         return response.json();
       })
       .then(data => {
-        // Actualizar la lista de usuarios con la información actualizada
-        const updatedUsers = users.map(u => u._id === user._id ? { ...u, ...updatedUser } : u);
+        const updatedUsers = users.map(u => u._id === editedUser._id ? { ...u, ...editedUser } : u);
         setUsers(updatedUsers);
+        setShowEditForm(false);  // Ocultar el formulario después de guardar
       })
       .catch(error => {
         console.error('Error al editar al usuario:', error);
       });
-  
   };
+
   return (
     <div className="container">
       <h2>Usuarios Activos</h2>
+      {editedUser && (
+        <div>
+          <label>
+            Nombre:
+            <input
+              type="text"
+              name="name"
+              value={editedUser.name}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type="password"
+              name="password"
+              value={editedUser.password}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Mail:
+            <input
+              type="text"
+              name="email"
+              value={editedUser.email}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Rol:
+            <input
+              type="text"
+              name="role"
+              value={editedUser.role}
+              onChange={handleInputChange}
+            />
+          </label>
+          {/* Similar inputs for email, role, etc. */}
+          <button onClick={handleSaveEdit}>Guardar cambios</button>
+        </div>
+      )}
       <table className="user-table">
         <thead>
           <tr>
@@ -100,7 +141,7 @@ const UserList = ({ setShowEditForm, setSelectedUser }) => {
                 <td>{user.role}</td>
                 <td>
                   <button onClick={() => handleEdit(user)}>Editar</button>
-                  <button onClick={() => toggleUserStatus(user._id)}>Inactivar</button> {/* Línea corregida */}
+                  <button onClick={() => toggleUserStatus(user._id)}>Inactivar</button>
                 </td>
               </tr>
             ))}
