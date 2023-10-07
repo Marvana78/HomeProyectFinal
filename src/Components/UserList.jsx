@@ -30,7 +30,7 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
   const handleEdit = (user) => {
     if (window.confirm("¿Estás seguro de que quieres editar este usuario?")) {
       setSelectedUser(user);
-      setShowEditForm(true);
+      // setShowEditForm(true);
       setEditedUser(user);  // Establecer el usuario que se está editando
     }
   };
@@ -42,7 +42,7 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
 
   const handleSaveEdit = () => {
     if (!editedUser) return;
-
+  
     if (window.confirm("¿Estás seguro de que quieres guardar los cambios?")) {
       fetch(`${BASE_URL}/api/users/edit/${editedUser._id}`, {
         method: 'PUT',
@@ -58,17 +58,20 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
           return response.json();
         })
         .then(data => {
-          const updatedUsers = localUsers.map(u => u._id === editedUser._id ? { ...u, ...editedUser } : u);
-          setLocalUsers(updatedUsers);
-          setShowEditForm(false);  // Ocultar el formulario después de guardar
+          // Aquí, en lugar de actualizar localUsers, podrías actualizar el estado `users` directamente
+          // o simplemente recargar la lista de usuarios desde el servidor
           setSuccessMessage("Cambios guardados con éxito.");
           setTimeout(() => setSuccessMessage(""), 3000);
+        })
+        .then(() => {
+          reloadUsers(); // Aquí se recarga la lista de usuarios
         })
         .catch(error => {
           console.error('Error al editar al usuario:', error);
         });
     }
   };
+  
 
   return (
     <div className="container">

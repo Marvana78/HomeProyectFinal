@@ -48,7 +48,9 @@ const UserManagement = () => {
       return user.id === editedUser.id ? editedUser : user;
     });
     setUsers(updatedUsers);
+    reloadUsers();  // Añadir esta línea para recargar la lista de usuarios desde el servidor
   };
+  
 
   const toggleUserStatus = (userId) => {
     const updatedUsers = users.map((user) => {
