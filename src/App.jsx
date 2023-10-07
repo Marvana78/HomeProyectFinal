@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from 'react';
 import UserForm from './Components/UserForm';
 import UserList from './Components/UserList';
@@ -44,8 +45,24 @@ function App() {
         setSelectedUser={setSelectedUser}
         toggleUserStatus={toggleUserStatus}
       />
+=======
+import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Registro from './Components/Registro';
+
+
+function App() {
+  return (
+    <>
+   <Registro />
+
+>>>>>>> registro
     </>
   );
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+>>>>>>> registro
