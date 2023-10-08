@@ -4,6 +4,9 @@ body {
     padding: 0;
   }
   
+h4{
+  color: #f57c00;
+}
 footer {
     margin-top: auto; 
     padding: 20px; 
@@ -33,10 +36,6 @@ footer {
 
 .imagenlogo {
   text-align: center;
-}
-
-.backgroundcolor-sections{
-  background-color:#9e9e9e ;
 }
 
 .textcenter{
