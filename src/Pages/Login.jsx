@@ -1,64 +1,75 @@
 import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import '../css/style.css';
-import serverAPI from '../api/serverAPI';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Login = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [error, setError] = useState('');
+	const [msjError, setMsjError] = useState('');
 
-	const startLogin = async (email, password) => {
-		try {
-			const resp = await serverAPI.post('/pages/Login', {
-				email,
-				password,
-			});
-
-			console.log(resp);
-			setError(resp.data.msg);
-
-			localStorage.setItem('token', resp.data.token);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-
-	const handleSubmit = (e) => {
+	const validarLogin = (e) => {
 		e.preventDefault();
+		setMsjError('');
 
 		//aca van las validaciones
 		if (email === '' || password === '') {
-			return console.log('todos los campos son obligatorios');
+			setMsjError('Todos los campos son obligatorios');
 		}
 
-		startLogin(email, password);
+		setTimeout(() => {
+			setMsjError('');
+		}, 5000);
 	};
 	return (
-		<div className='login-container'>
-			<form onSubmit={handleSubmit} className='form-container'>
-				{error ? <h3 className='errorStyle'>{error}</h3> : ''}
-				<h1>Login</h1>
+		<div className=''>
+			{msjError ? (
+				<p className='col-5 mx-auto bg-danger text-white p-3 text-center'>
+					{msjError}
+				</p>
+			) : (
+				''
+			)}
 
-				<div className='input-container'>
-					<label htmlFor='username'>Email:</label>
-					<input
-						type='email'
-						id='email'
-						onChange={(e) => setEmail(e.target.value)}
-					/>
+			<div className='Body'>
+				<br />
+				<h1 className='container text-center text-dark'>
+					<strong>Login</strong>
+				</h1>
+				<br />
+				<div className='col-3 mx-auto'>
+					<div>
+						<Form onSubmit={validarLogin}>
+							<Form.Group className='mt-2' controlId='email'>
+								<Form.Label className='text-dark'>
+									<strong>Email</strong>
+								</Form.Label>
+								<Form.Control
+									type='email'
+									placeholder='Ingrese su correo electrónico'
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+							</Form.Group>
+
+							<Form.Group className='mt-2' controlId='contrasena'>
+								<Form.Label>
+									<strong>Contraseña</strong>
+								</Form.Label>
+								<Form.Control
+									type='password'
+									placeholder='Ingrese su contraseña'
+									value={password}
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+							</Form.Group>
+							<Button className='mt-5 w-100 p-2' variant='dark' type='submit'>
+								Iniciar sesión
+							</Button>
+						</Form>
+					</div>
 				</div>
-				<div className='input-container'>
-					<label htmlFor='password'>Password:</label>
-					<input
-						type='password'
-						id='password'
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-				</div>
-				<button type='submit'>Inciar Sesion</button>
-			</form>
+			</div>
 		</div>
 	);
 };
