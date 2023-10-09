@@ -142,8 +142,8 @@ const comboImages = [image1, image2];
     <p style={descriptionStyle}>{combo1.Descripcion}</p>
     <p className="lh-1">Cantidad: {combo1.Cantidad}</p>
     <p className="lh-1 fw-bold">Total: ${combo1.Precio}</p>
-    <Button style={buttonStyle} onClick={() => {cargarProducto(combo1); agregarProductoAPedidos(combo1);}}
-  >Agregar</Button>
+    <Button style={buttonStyle} onClick={() => {cargarProducto(producto);props.agregarProductoAPedidos(producto);}}
+>Agregar</Button>
     </div>
     <div style={cardStyle}>
     <img src={comboImages[1]} alt={`Imagen ${combo2._id}`} style={imageStyle} />
@@ -151,8 +151,8 @@ const comboImages = [image1, image2];
     <p style={descriptionStyle}>{combo2.Descripcion}</p>
     <p className="lh-1">Cantidad: {combo2.Cantidad}</p>
     <p className="lh-1 fw-bold">Total: ${combo2.Precio}</p>
-    <Button style={buttonStyle} onClick={() => {cargarProducto(combo2); agregarProductoAPedidos(combo2);}}
-  >Agregar</Button>
+    <Button style={buttonStyle} onClick={() => {cargarProducto(producto);props.agregarProductoAPedidos(producto);}}
+>Agregar</Button>
     </div>
     </div>
     </section>
