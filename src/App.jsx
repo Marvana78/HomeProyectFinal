@@ -1,13 +1,13 @@
-
-import { Approuter } from "./router/Approuter";
+import './CSS/styles.css';
+import { Approuter } from './router/Approuter';
 
 
 function App() {
   return (
-  <>
-    <Approuter/>
-  </>
-  )
+    <>
+      <Approuter /> 
+    </>
+  );
 }
 
-export default App
+export default App;

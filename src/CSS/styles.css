@@ -1,0 +1,45 @@
+/* Estilos generales */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Days+One&family=Poppins:wght@400;500;700;800&family=Roboto&display=swap');
+body {
+    background-color: #9e9e9e; /* Gris Primario para el fondo */
+    color: rgba(0, 0, 0, 0.87); /* Gris Secundario para el texto */
+  }
+  
+  /* Botones */
+  button {
+    background-color: #f57c00; /* Naranja */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+  }
+  
+  button:hover {
+    background-color: darken(#f57c00, 10%); /* Oscurecer el naranja un 10% al pasar el ratón */
+  }
+  
+  /* Contenedores */
+  .container {
+    background-color: #9e9e9e; /* Gris Primario */
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra para añadir profundidad */
+  }
+  
+  /* Iconos */
+  .icon {
+    color: #9e9e9e; /* Gris Primario */
+    font-size: 24px;
+  }
+  
+  /* Texto */
+  .text-secondary {
+    color: rgba(0, 0, 0, 0.87); /* Gris Secundario */
+  }
+  /* Estilos para mensajes de error */
+.error {
+  color: #f44336; /* Color rojo para los errores */
+  font-size: 14px;
+  margin-top: 4px; /* Espacio superior para separar los mensajes de los campos */
+}
