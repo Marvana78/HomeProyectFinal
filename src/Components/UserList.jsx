@@ -109,14 +109,16 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
             />
           </label>
           <label>
-            Rol:
-            <input
-              type="text"
-              name="role"
-              value={editedUser.role}
-              onChange={handleInputChange}
-            />
-          </label>
+  Rol:
+  <select
+    name="role"
+    value={editedUser.role}
+    onChange={handleInputChange}
+  >
+    <option value="Cliente">Cliente</option>
+    <option value="Administrador">Administrador</option>
+  </select>
+</label>
           <button onClick={handleSaveEdit}>Guardar cambios</button>
         </div>
       )}
