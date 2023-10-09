@@ -1,54 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
+import '../css/style.css';
+import serverAPI from '../api/serverAPI';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 
-
 export const Login = () => {
-  	const [email, setEmail] = useState('');
-		const [password, setPassword] = useState('');
-	
-    const handleSubmit = (e) => {
-      e.preventDefault
-    }
-  
-    if(email === '' || password === '') {
-      return console.log('Todos los campos son obligatorios');
-    }
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [error, setError] = useState('');
 
-    return (
-		<>
-			<Navbar />
-			<h1 className='container text-center text-primary'>Iniciar Sesion</h1>
+	const startLogin = async (email, password) => {
+		try {
+			const resp = await serverAPI.post('/pages/Login', {
+				email,
+				password,
+			});
 
-			<div>
-				<Form onSubmit={handleSubmit}>
-					<Form.Group className='mt-4 ' controlId='nombre'>
-						<Form.Label>Email</Form.Label>
-						<Form.Control
-							type='text'
-							placeholder='Ingrese su nombre'
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-						/>
-					</Form.Group>
+			console.log(resp);
+			setError(resp.data.msg);
 
-					<Form.Group className='mt-2' controlId='edad'>
-						<Form.Label>Contraseña</Form.Label>
-						<Form.Control
-							type='number'
-							id='Ingrese su password'
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</Form.Group>
+			localStorage.setItem('token', resp.data.token);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
-					<Button className='mt-5 w-100 p-2' variant='primary' type='submit'>
-						Iniciar Sesion
-					</Button>
-				</Form>
-			</div>
-			<Footer />
-		</>
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		//aca van las validaciones
+		if (email === '' || password === '') {
+			return console.log('todos los campos son obligatorios');
+		}
+
+		startLogin(email, password);
+	};
+	return (
+		<div className='login-container'>
+			<form onSubmit={handleSubmit} className='form-container'>
+				{error ? <h3 className='errorStyle'>{error}</h3> : ''}
+				<h1>Login</h1>
+
+				<div className='input-container'>
+					<label htmlFor='username'>Email:</label>
+					<input
+						type='email'
+						id='email'
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</div>
+				<div className='input-container'>
+					<label htmlFor='password'>Password:</label>
+					<input
+						type='password'
+						id='password'
+						onChange={(e) => setPassword(e.target.value)}
+					/>
+				</div>
+				<button type='submit'>Inciar Sesion</button>
+			</form>
+		</div>
 	);
 };
+
 export default Login;
