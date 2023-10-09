@@ -47,8 +47,8 @@ margin: '10px 0',
 const buttonStyle = {
   display: 'block', 
   width: '100%', 
- padding: '10px 20px',
- backgroundColor: '#f57c00',
+  padding: '10px 20px',
+  backgroundColor: '#f57c00',
   color: '#fff',
   border: 'none',
   borderRadius: '4px',
@@ -68,8 +68,9 @@ const secondVideoStyle = {
   margin: '0 auto', 
     };
 
-const secondVideoMarginBottom = '80px'; 
+const secondVideoMarginBottom = '40px'; 
 
+const productImages = [image3, image4, image5, image6];
 
 export const Home = () => {
 
@@ -97,17 +98,15 @@ useEffect(() =>{
     <Navbar/>
     <section>
 <div className="video-container">
-        <video controls autoPlay loop style={videoStyle}>
-          <source src={videoSource} type="video/mp4" />
-        </video>
-      </div>
-      </section>
-      <section>
-      <div className="image-between-video-and-cards" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '90px', marginBottom: '10px' }}>
-  <img
-    src={imageBetweenVideoAndCards}
-    alt="Image Between Video and Cards"
-    style={{
+    <video controls autoPlay loop style={videoStyle}>
+    <source src={videoSource} type="video/mp4" />
+    </video>
+    </div>
+    </section>
+    <section>
+    <div className="image-between-video-and-cards" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '90px', marginBottom: '10px' }}>
+    <img src={imageBetweenVideoAndCards} alt="Image Between Video and Cards"
+     style={{
       maxWidth: '80%', 
       maxHeight: '150px', 
       height: 'auto',
@@ -115,58 +114,25 @@ useEffect(() =>{
     }}
   />
 </div>
-
   <div className='d-flex justify-content-center align-items-center flex-wrap my-5 backgroundcolor-sections p-5'>
-  {cargarProductos.map((producto) => (
+  {cargarProductos.map((producto, index) => (
     <div key={producto._id} style={cardStyle}>
-      <img src={image1} alt={`Imagen ${producto._id}`} style={imageStyle} />
-      <p style={descriptionStyle}>{producto.Descripcion}</p>
-      <p className="lh-1 fw-bold">Total: ${producto.Precio}</p>
-      <Button style={buttonStyle}>Agregar</Button>
+    <img src={productImages[index % productImages.length]} alt={`Imagen ${producto._id}`} style={imageStyle} />
+    <p style={descriptionStyle}>{producto.Descripcion}</p>
+    <p className="lh-1 fw-bold">Total: ${producto.Precio}</p>
+    <Button style={buttonStyle}>Agregar</Button>
     </div>
   ))}
-
-      <div style={cardStyle}>
-        <img src={image2} alt='Imagen 2' style={imageStyle} />
-        <p style={descriptionStyle}>makis de salmón, tuna rolls, kani maki, sashimi.</p>
-        <p className="lh-1 fw-bold" >Total: $5.000</p>
-        <Button style={buttonStyle}>Agregar</Button>
-      </div>
-      <div style={cardStyle}>
-        <img src={image3} alt='Imagen 3' style={imageStyle} />
-        <p style={descriptionStyle}>Relleno de salmón, langostinos, palta y queso crema, con salmón por fu…</p>
-        <p className="lh-1 fw-bold" >Total: $3.021</p>
-        <Button style={buttonStyle}>Agregar</Button>
-      </div>
-      <div style={cardStyle}>
-        <img src={image4} alt='Imagen 4' style={imageStyle} />
-        <p style={descriptionStyle}>Relleno de salmón, pescado blanco y verduras marinadas en cilantro y p…</p>
-        <p className="lh-1 fw-bold" >Total: $3.376</p>
-        <Button style={buttonStyle}>Agregar</Button>
-      </div>
-      <div style={cardStyle}>
-        <img src={image5} alt='Imagen 5' style={imageStyle} />
-        <p style={descriptionStyle}>Braseada con salsa teriyaki y hongos portobello, sobre colchón de puré…</p>
-        <p className="lh-1 fw-bold" >Total: $4.200</p>
-        <Button style={buttonStyle}>Agregar</Button>
-      </div>
-      <div style={cardStyle}>
-        <img src={image6} alt='Imagen 6' style={imageStyle} />
-        <p style={descriptionStyle}>Relleno de tomates secos en conserva, espinaca, palta y cebolla morada…</p>
-        <p className="lh-1 fw-bold" >Total: $ 8.182</p>
-        <Button style={buttonStyle}>Agregar</Button>
-      </div>
-
     </div>
     </section>
     <section>
-        <div className="video-container" style={{ ...videoContainerStyle, marginBottom: secondVideoMarginBottom }}>
-          <video controls autoPlay loop style={videoStyle}>
-            <source src={videoSource2} type="video/mp4" />
-          </video>
-        </div>
-      </section>
-      <Footer/>
+    <div className="video-container" style={{ ...videoContainerStyle, marginBottom: secondVideoMarginBottom }}>
+    <video controls autoPlay loop style={videoStyle}>
+    <source src={videoSource2} type="video/mp4" />
+    </video>
+    </div>
+    </section>
+    <Footer/>
     </>
   )
 }
