@@ -5,7 +5,7 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
   const [editedUser, setEditedUser] = useState(null);  // Estado para el usuario que se está editando
   const [successMessage, setSuccessMessage] = useState("");  // Estado para el mensaje de éxito
 
-  
+
 
   const toggleUserStatus = (userId) => {
     if (window.confirm("¿Estás seguro de que quieres inactivar este usuario?")) {
@@ -42,7 +42,7 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
 
   const handleSaveEdit = () => {
     if (!editedUser) return;
-  
+
     if (window.confirm("¿Estás seguro de que quieres guardar los cambios?")) {
       fetch(`${BASE_URL}/api/users/edit/${editedUser._id}`, {
         method: 'PUT',
@@ -71,12 +71,12 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
         });
     }
   };
-  
+
 
   return (
     <div className="container">
       <h2>Usuarios Activos</h2>
-      
+
       {successMessage && <div className="alert alert-success">{successMessage}</div>}
 
       {editedUser && (
@@ -109,20 +109,20 @@ const UserList = ({ reloadUsers,setShowEditForm, setSelectedUser, users }) => {
             />
           </label>
           <label>
-  Rol:
-  <select
-    name="role"
-    value={editedUser.role}
-    onChange={handleInputChange}
-  >
-    <option value="Cliente">Cliente</option>
-    <option value="Administrador">Administrador</option>
-  </select>
-</label>
+            Rol:
+            <select
+              name="role"
+              value={editedUser.role}
+              onChange={handleInputChange}
+            >
+              <option value="Cliente">Cliente</option>
+              <option value="Administrador">Administrador</option>
+            </select>
+          </label>
           <button onClick={handleSaveEdit}>Guardar cambios</button>
         </div>
       )}
-      
+
       <table className="user-table">
         <thead>
           <tr>
