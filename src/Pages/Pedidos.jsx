@@ -24,11 +24,10 @@ const Pedidos = () => {
         console.error('Error al obtener los menús:', error);
       });
   }, []);
-
-  // Función para simular el pedido sin guardar en la base de datos
+console.log (menus)
+  // Función para simular el pedido 
   const hacerPedido = () => {
-    // Aquí puedes simular el proceso de guardar el pedido
-    // Por ejemplo, puedes establecer una variable de estado para indicar que el pedido se ha enviado
+    
     setPedidoGuardado(true);
     setMensajeConfirmacion('Pedido pendiente'); // Mensaje de confirmación simulado
   };
