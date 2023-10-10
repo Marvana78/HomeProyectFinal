@@ -12,67 +12,51 @@ ul {
     border: 1px solid #ccc;
     border-radius: 4px;
     text-align: center;
-    
-    background-color: #9e9e9e(192, 192, 176, 0.932);
-
-    
-}
-  
+    background-color: #9e9e9e(192, 192, 176, 0.932);   
+} 
 .text-color {
     color:#f57c00;
     font-weight: 700;
     height: 6rem;
     flex:1;
 }
-/* card.css */
 
-/* Estilos base para las tarjetas */
-
- /* Estilos para tablets (ancho entre 769px y 1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* Estilos para dispositivos móviles (ancho máximo de 768px) */
+@media (max-width: 768px) {
     .header {
-      font-size: 28px; /* Tamaño de fuente más grande para la cabecera */
+      font-size: 18px; /* Ajusta el tamaño de fuente para móviles */
     }
-  
     .list-card-item {
-      font-size: 18px; /* Tamaño de fuente más grande para los elementos de la lista */
-      margin: 15px; /* Margen ligeramente más grande */
-      padding: 15px; /* Espacio interno ligeramente más grande */
+      font-size: 14px; /* Ajusta el tamaño de fuente para móviles */
+      margin: 5px; /* Ajusta el margen para móviles */
+      padding: 5px; /* Ajusta el espacio interno para móviles */
     }
-  
     .total {
-      font-size: 20px; /* Tamaño de fuente más grande para el costo total */
+      font-size: 16px; /* Ajusta el tamaño de fuente para móviles */
     }
-  
     .confirmation {
-      font-size: 18px; /* Tamaño de fuente más grande para el mensaje de confirmación */
+      font-size: 14px; /* Ajusta el tamaño de fuente para móviles */
     }
-  
     .button {
-      font-size: 18px; /* Tamaño de fuente más grande para el botón */
+      font-size: 14px; /* Ajusta el tamaño de fuente para móviles */
     }
-}
-
+  }
 /* Estilos para tablets (ancho entre 769px y 1600px) */
 @media (min-width: 769px) and (max-width: 1600px) {
     .header {
       font-size: 28px; /* Tamaño de fuente más grande para la cabecera */
-    }
-  
+    } 
     .list-card-item {
       font-size: 18px; /* Tamaño de fuente más grande para los elementos de la lista */
       margin: 15px; /* Margen ligeramente más grande */
       padding: 15px; /* Espacio interno ligeramente más grande */
     }
-  
     .total {
       font-size: 20px; /* Tamaño de fuente más grande para el costo total */
     }
-  
     .confirmation {
       font-size: 18px; /* Tamaño de fuente más grande para el mensaje de confirmación */
     }
-  
     .button {
       font-size: 18px; /* Tamaño de fuente más grande para el botón */
     }
