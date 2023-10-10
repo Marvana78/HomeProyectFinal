@@ -74,7 +74,7 @@ const onclickProduct = async (producto) => {
   
   try {
     const resp = await serverAPI.post('/menu/AddMenu', producto);
-    
+   console.log(producto.Nombre) ;
   } catch (error) {
     console.error(error);
   }
@@ -136,28 +136,14 @@ const comboImages = [image1, image2];
   <div className='d-flex justify-content-center align-items-center flex-wrap my-5 p-5'>
   {cargarProductos.map((producto, index) => (
     <div key={producto._id} style={cardStyle}>
+      <h1>{producto.Nombre}</h1>
     <img src={productImages[index % productImages.length]} alt={`Imagen ${producto._id}`} style={imageStyle} />
     <p style={descriptionStyle}>{producto.Descripcion}</p>
     <p className="lh-1 fw-bold">Total: ${producto.Precio}</p>
     <Button style={buttonStyle} onClick={()=>onclickProduct(producto)}>Agregar</Button>
     </div>
   ))}
-   <div style={cardStyle}>
-    <img src={comboImages[0]} alt={`Imagen ${combo1._id}`} style={imageStyle} />
-    <p className="lh-1" style={{ paddingTop: '10px' }}>{combo1.Nombre}</p>
-    <p style={descriptionStyle}>{combo1.Descripcion}</p>
-    <p className="lh-1">Cantidad: {combo1.Cantidad}</p>
-    <p className="lh-1 fw-bold">Total: ${combo1.Precio}</p>
-    <Button style={buttonStyle}>Agregar</Button>
-    </div>
-    <div style={cardStyle}>
-    <img src={comboImages[1]} alt={`Imagen ${combo2._id}`} style={imageStyle} />
-    <p className="lh-1" style={{ paddingTop: '10px' }}>{combo2.Nombre}</p>
-    <p style={descriptionStyle}>{combo2.Descripcion}</p>
-    <p className="lh-1">Cantidad: {combo2.Cantidad}</p>
-    <p className="lh-1 fw-bold">Total: ${combo2.Precio}</p>
-    <Button style={buttonStyle}>Agregar</Button>
-    </div>
+   
     </div>
     </section>
     <section>
