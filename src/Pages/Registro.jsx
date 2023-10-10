@@ -41,11 +41,7 @@ const Registro = () => {
       setMsjError('Todos los campos son obligatorios');
 
       // Configura un temporizador para limpiar el mensaje de error después de 5 segundos
-      setTimeout(() => {
-        setMsjError('');
-      }, 5000);
       
-      return;
     } else if (edad < 18) {
       setMsjError('El usuario debe ser mayor a 18 años');
     } else if (nombre.length < 3) {
@@ -58,6 +54,13 @@ const Registro = () => {
       setMsjError('Las contraseñas deben ser iguales');
     }
 
+    if(msjError){
+      setTimeout(() => {
+        setMsjError('');
+      }, 5000);
+      
+      return;
+    }
     // Guardar datos del usuario en LocalStorage
     const userData = {
       nombre,
