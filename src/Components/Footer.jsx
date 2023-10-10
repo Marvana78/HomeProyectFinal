@@ -5,6 +5,7 @@ export const Footer = () => {
   return (
     <div>
 <footer>
+<div className="col-12" style={{ backgroundColor: '#f57c00', height: '2px', marginBottom: '40px' }}></div>
       <div className="container-fluid mt-3">
         <div className="row text-center">
         <ul className="d-flex justify-content-center list-unstyled mb-4">
