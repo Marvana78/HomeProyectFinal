@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import {useState,useEffect } from 'react';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import serverAPI from '../api/serverAPI';
@@ -24,6 +24,7 @@ const Pedidos = () => {
         console.error('Error al obtener los menús:', error);
       });
   }, []);
+
   // Función para simular el pedido sin guardar en la base de datos
   const hacerPedido = () => {
     // Aquí puedes simular el proceso de guardar el pedido
@@ -31,13 +32,14 @@ const Pedidos = () => {
     setPedidoGuardado(true);
     setMensajeConfirmacion('Pedido pendiente'); // Mensaje de confirmación simulado
   };
+
   return (
     <div>
       <Navbar />
-      <h1 className="header">Mis pedidos</h1>
+      <h1 style={{ textAlign: 'center', color: 'black' }}>Mis pedidos</h1>
       <ul className='list-card'>
         {menus.map((menu) => (
-          <li key={menu._id} className='list-card-item'>
+          <li key={menu._id} className='list-card'>
             <p className='text-color'>Nombre: {menu.Nombre}</p>
             <p className='text-color'>Descripción: {menu.Descripcion}</p>
             <p className='text-color'>Monto: ${menu.Monto}</p>
@@ -45,13 +47,14 @@ const Pedidos = () => {
           </li>
         ))}
       </ul>
-      <p className="total">Costo Total: ${costoTotal}</p>
-      {pedidoGuardado && <p className="confirmation">{mensajeConfirmacion}</p>}
+      <p style={{ fontWeight: 'bold', fontSize: '18px', color: 'black' }}>Costo Total: ${costoTotal}</p>
+      {pedidoGuardado && <p style={{ color: 'green' }}>{mensajeConfirmacion}</p>}
       {!pedidoGuardado && (
         <div>
-          <button onClick={hacerPedido} className="button">
-            Enviar Pedido
-          </button>
+          <button onClick={hacerPedido} style={{ display: 'block', margin: '0 auto' }}>
+  Enviar Pedido
+</button>
+
           {mensajeConfirmacion && <p>{mensajeConfirmacion}</p>}
         </div>
       )}
