@@ -1,4 +1,4 @@
-import './CSS/styles.css';
+import './css/style.css';
 import { Approuter } from './router/Approuter';
 
 
