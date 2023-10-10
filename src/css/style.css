@@ -7,6 +7,20 @@ body {
 h4{
   color: #f57c00;
 }
+
+.button.registro {
+  background-color: #f57c00; 
+  color: white;
+  margin-bottom: 80px; 
+ 
+}
+
+.container.registro.text-center {
+  background-color: black; 
+  color: #f57c00; 
+ 
+}
+
 footer {
     margin-top: auto; 
     padding: 20px; 
@@ -28,7 +42,6 @@ footer {
 .navbar{
   background-color: black;
 }
-
 
 .nav-link:hover {
   color: #f57c00 !important; 

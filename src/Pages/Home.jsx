@@ -70,6 +70,15 @@ try {
 }
 
   };
+const onclickProduct = async (producto) => {
+  
+  try {
+    const resp = await serverAPI.post('/menu/AddMenu', producto);
+    
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 useEffect(() =>{
   cargarProducto();
@@ -130,7 +139,7 @@ const comboImages = [image1, image2];
     <img src={productImages[index % productImages.length]} alt={`Imagen ${producto._id}`} style={imageStyle} />
     <p style={descriptionStyle}>{producto.Descripcion}</p>
     <p className="lh-1 fw-bold">Total: ${producto.Precio}</p>
-    <Button style={buttonStyle}>Agregar</Button>
+    <Button style={buttonStyle} onClick={()=>onclickProduct(producto)}>Agregar</Button>
     </div>
   ))}
    <div style={cardStyle}>

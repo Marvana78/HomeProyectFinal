@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from '../Components/Navbar';
+import Footer from '../Components/Footer';
 import { Form, Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../css/styleRegistro.css';
+import '../css/style.css';
 
 
 const Registro = () => {
@@ -67,7 +68,7 @@ const Registro = () => {
 
     setMsjError('Usuario Registrado Correctamente');
   };
-
+<Navbar/>
   return (
     <div className="">
       {msjError ? (
@@ -78,7 +79,7 @@ const Registro = () => {
 
       <div className='Body'>
         <br />
-        <h1 className='container text-center text-primary'>Formulario de Registro</h1><br />
+        <h1 className='container registro text-center'>Formulario de Registro</h1><br />
         <div className='col-3 mx-auto'>
           <Form onSubmit={validarFormulario}>
             <Form.Group className="mt-4 " controlId="nombre">
@@ -131,12 +132,13 @@ const Registro = () => {
               />
             </Form.Group>
 
-            <Button className="mt-5 w-100 p-2" variant="primary" type="submit">
+            <Button className="button registro mt-5 w-100 p-2" type="submit">
               Registrarse
             </Button>
           </Form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };
