@@ -68,9 +68,11 @@ const Registro = () => {
 
     setMsjError('Usuario Registrado Correctamente');
   };
-<Navbar/>
+
   return (
-    <div className="">
+    <>
+    <Navbar/>
+    <div className="gray-background" >
       {msjError ? (
         <p className="col-5 mx-auto bg-danger text-white p-3 text-center">{msjError}</p>
       ) : (
@@ -79,7 +81,7 @@ const Registro = () => {
 
       <div className='Body'>
         <br />
-        <h1 className='container registro text-center'>Formulario de Registro</h1><br />
+        <h2 className=' text-center mt-4'>Formulario de Registro</h2><br />
         <div className='col-3 mx-auto'>
           <Form onSubmit={validarFormulario}>
             <Form.Group className="mt-4 " controlId="nombre">
@@ -138,8 +140,9 @@ const Registro = () => {
           </Form>
         </div>
       </div>
-      <Footer/>
     </div>
+    <Footer/>
+    </>
   );
 };
 

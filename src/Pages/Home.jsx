@@ -63,7 +63,7 @@ export const Home = () => {
 
 try {
   const resp = await serverAPI.get('/prod/GetProd');
-  
+  console.log(resp)
   setCargarProductos(resp.data);
 } catch (error) {
   console.error(error);
@@ -115,11 +115,11 @@ const comboImages = [image1, image2];
     <div className="row">
     <div className="col-md-6">
     <div style={{ color: 'white', padding: '20px' }}>
-    <h4 style={{ textAlign: 'center', marginTop: '70px'}} >CONCEPTO TAKY SUSHI</h4>
+    <h4 className="text-center mt-4 orange-text p-3">CONCEPTO TAKY SUSHI</h4>
     <p>TakySushi es sinónimo de gastronomía de primer nivel. Reconocidos como el inconfundible referente del sushi y cocina de tendencia asiática, logramos transmitir placer y sensualidad en cada encuentro, gracias a combinaciones de sabores vanguardistas y exclusivos.</p>
-    <h4 style={{ textAlign: 'center',paddingTop: '20px' }} >NUESTRA MISIÓN</h4>
+    <h4 className="text-center mt-4 orange-text p-3">NUESTRA MISIÓN</h4>
     <p>Hacer de TakySushi un espacio relacionado con el buen vivir: Ofreciendo a nuestros clientes sushi creativo y de calidad premium, cocina innovadora y dinámica, en un ambiente vanguardista y relajado, a través de un servicio anticipativo y profesional.</p>
-    <h4 style={{ textAlign: 'center' ,paddingTop: '20px' }} >NUESTRO PRODUCTO</h4>
+    <h4 className="text-center mt-4 orange-text p-3">NUESTRO PRODUCTO</h4>
     <p>TakySushi brinda un excelente producto, en un marco de calidad de servicio atento y profesional, y acondiciona sus locales en ubicaciones estratégicas con un diseño personal, que conforman su identidad y hacen de cada visita a SushiClub una experiencia única.</p>
     </div>
     </div>

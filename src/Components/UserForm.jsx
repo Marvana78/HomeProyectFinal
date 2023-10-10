@@ -103,22 +103,22 @@ const UserForm = ({ addUser, editUser, user }) => {
         <div className="container">
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label className="text-secondary">Nombre:</label>
+                    <label className="text-secondary text-white">Nombre:</label>
                     <input type="text" name="name" value={formData.name} onChange={handleChange} />
                     {errors.name && <span className="error">{errors.name}</span>}
                 </div>
                 <div className="form-group">
-                    <label className="text-secondary">Correo electrónico:</label>
+                    <label className="text-secondary text-white">Correo electrónico:</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} />
                     {errors.email && <span className="error">{errors.email}</span>}
                 </div>
                 <div className="form-group">
-                    <label className="text-secondary">Contraseña:</label>
+                    <label className="text-secondary text-white">Contraseña:</label>
                     <input type="password" name="password" value={formData.password} onChange={handleChange} />
                     {errors.password && <span className="error">{errors.password}</span>}
                 </div>
                 <div className="form-group">
-                    <label className="text-secondary">Rol:</label>
+                    <label className="text-secondary text-white">Rol:</label>
                     <select name="role" value={formData.role} onChange={handleChange}>
                         <option value="cliente">Cliente</option>
                         <option value="administrador">Administrador</option>
