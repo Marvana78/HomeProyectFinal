@@ -24,7 +24,6 @@ const Pedidos = () => {
         console.error('Error al obtener los menús:', error);
       });
   }, []);
-
   // Función para simular el pedido sin guardar en la base de datos
   const hacerPedido = () => {
     // Aquí puedes simular el proceso de guardar el pedido
@@ -32,7 +31,6 @@ const Pedidos = () => {
     setPedidoGuardado(true);
     setMensajeConfirmacion('Pedido pendiente'); // Mensaje de confirmación simulado
   };
-
   return (
     <div>
       <Navbar />
