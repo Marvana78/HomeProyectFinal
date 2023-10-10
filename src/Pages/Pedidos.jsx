@@ -3,6 +3,7 @@ import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import serverAPI from '../api/serverAPI';
 import '../css/style.css';
+import '../CSS/pedidos.css';
 
 const Pedidos = () => {
   const [menus, setMenus] = useState([]);
@@ -35,23 +36,25 @@ const Pedidos = () => {
   return (
     <div>
       <Navbar />
-      <h1 style={{ textAlign: 'center', color: 'black' }}>Mis pedidos</h1>
-      <ul style={{ listStyleType: 'none' }}>
+      <h1 className="header">Mis pedidos</h1>
+      <ul className='list-card'>
         {menus.map((menu) => (
-          <li key={menu._id} style={{ border: '1px solid #ccc', padding: '10px', margin: '10px' }}>
-            <p style={{ color: ' #f57c00' }}>Nombre: {menu.Nombre}</p>
-            <p style={{ color: ' #f57c00' }}>Descripción: {menu.Descripcion}</p>
-            <p style={{ color: ' #f57c00' }}>Monto: ${menu.Monto}</p>
-            <p style={{ color: ' #f57c00' }}>Unidades: {menu.Unidades}</p>
+          <li key={menu._id} className='list-card-item'>
+            <p className='text-color'>Nombre: {menu.Nombre}</p>
+            <p className='text-color'>Descripción: {menu.Descripcion}</p>
+            <p className='text-color'>Monto: ${menu.Monto}</p>
+            <p className='text-color'>Unidades: {menu.Unidades}</p>
           </li>
         ))}
       </ul>
-      <p style={{ fontWeight: 'bold', fontSize: '18px', color: 'black' }}>Costo Total: ${costoTotal}</p>
-      {pedidoGuardado && <p style={{ color: 'green' }}>{mensajeConfirmacion}</p>}
+      <p className="total">Costo Total: ${costoTotal}</p>
+      {pedidoGuardado && <p className="confirmation">{mensajeConfirmacion}</p>}
       {!pedidoGuardado && (
         <div>
-          <button onClick={hacerPedido}>Enviar Pedido</button>
-          {mensajeConfirmacion && <p style={{ color: 'red' }}>{mensajeConfirmacion}</p>}
+          <button onClick={hacerPedido} className="button">
+            Enviar Pedido
+          </button>
+          {mensajeConfirmacion && <p>{mensajeConfirmacion}</p>}
         </div>
       )}
       <Footer />

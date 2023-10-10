@@ -1,16 +1,106 @@
 /* card.css */
-
-.card {
+ul {
+    display: flex; /* Usar flexbox para mostrar los elementos en una fila */
+    flex-wrap: wrap; /* Permitir que los elementos se envuelvan si no caben en el ancho */
+    list-style-type: none; /* Eliminar los marcadores de lista predeterminados */
+    padding: 0; /* Eliminar el relleno predeterminado de la lista */
+  }
+.list-card {
+    flex: 1; /* Hacer que las tarjetas se expandan para llenar el espacio disponible */
+    margin: 0px; /* Margen entre las tarjetas */
+    padding: 10px;/* Espacio interno de las tarjetas (opcional) */
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    background-color:#101010;
-  }
-  
-  .card p {
-    margin: 5px 0;
-  }
-/* texto-negro.css */
+    text-align: center;
+    
+    background-color: #9e9e9e(192, 192, 176, 0.932);
 
+    
+}
+  
+.text-color {
+    color:#f57c00;
+    font-weight: 700;
+    height: 6rem;
+    flex:1;
+}
+/* card.css */
+
+/* Estilos base para las tarjetas */
+
+ /* Estilos para tablets (ancho entre 769px y 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .header {
+      font-size: 28px; /* Tamaño de fuente más grande para la cabecera */
+    }
+  
+    .list-card-item {
+      font-size: 18px; /* Tamaño de fuente más grande para los elementos de la lista */
+      margin: 15px; /* Margen ligeramente más grande */
+      padding: 15px; /* Espacio interno ligeramente más grande */
+    }
+  
+    .total {
+      font-size: 20px; /* Tamaño de fuente más grande para el costo total */
+    }
+  
+    .confirmation {
+      font-size: 18px; /* Tamaño de fuente más grande para el mensaje de confirmación */
+    }
+  
+    .button {
+      font-size: 18px; /* Tamaño de fuente más grande para el botón */
+    }
+}
+
+/* Estilos para tablets (ancho entre 769px y 1600px) */
+@media (min-width: 769px) and (max-width: 1600px) {
+    .header {
+      font-size: 28px; /* Tamaño de fuente más grande para la cabecera */
+    }
+  
+    .list-card-item {
+      font-size: 18px; /* Tamaño de fuente más grande para los elementos de la lista */
+      margin: 15px; /* Margen ligeramente más grande */
+      padding: 15px; /* Espacio interno ligeramente más grande */
+    }
+  
+    .total {
+      font-size: 20px; /* Tamaño de fuente más grande para el costo total */
+    }
+  
+    .confirmation {
+      font-size: 18px; /* Tamaño de fuente más grande para el mensaje de confirmación */
+    }
+  
+    .button {
+      font-size: 18px; /* Tamaño de fuente más grande para el botón */
+    }
+  }
+/* Estilos para computadoras de escritorio (ancho mínimo de 1025px) */
+@media (min-width: 1025px) {
+    .header {
+      font-size: 32px; /* Tamaño de fuente aún más grande para la cabecera */
+    }
+  
+    .list-card-item {
+      font-size: 20px; /* Tamaño de fuente aún más grande para los elementos de la lista */
+      margin: 20px; /* Margen aún más grande */
+      padding: 20px; /* Espacio interno aún más grande */
+    }
+  
+    .total {
+      font-size: 22px; /* Tamaño de fuente aún más grande para el costo total */
+    }
+  
+    .confirmation {
+      font-size: 20px; /* Tamaño de fuente aún más grande para el mensaje de confirmación */
+    }
+  
+    .button {
+      font-size: 20px; /* Tamaño de fuente aún más grande para el botón */
+    }
+  }
+    
+
+  
