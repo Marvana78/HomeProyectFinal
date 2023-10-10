@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const Registro = () => {
-  return (
-    <div>
-      Registro
-    </div>
-  )
-}
-
-export default Registro
-=======
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -154,4 +141,3 @@ const Registro = () => {
 };
 
 export default Registro;
->>>>>>> registro
