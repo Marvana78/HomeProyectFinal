@@ -1,0 +1,16 @@
+/* card.css */
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color:#101010;
+  }
+  
+  .card p {
+    margin: 5px 0;
+  }
+/* texto-negro.css */
+
